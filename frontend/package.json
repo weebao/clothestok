@@ -1,0 +1,60 @@
+{
+  "name": "pose-three",
+  "version": "0.7.0",
+  "private": true,
+  "title": "Pose Tracking Demo",
+  "description": "Geenee pose tracking demo",
+  "dependencies": {
+    "@geenee/bodyrenderers-three": "^0.7.0",
+    "next": "^14.2.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.161.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.14",
+    "@types/react": "18.3.3",
+    "@types/three": "^0.161.2",
+    "autoprefixer": "^10.4.19",
+    "copy-webpack-plugin": "^11.0.0",
+    "copyfiles": "^2.4.1",
+    "css-loader": "^6.8.1",
+    "esbuild-loader": "^4.0.2",
+    "html-webpack-plugin": "^5.5.3",
+    "mini-css-extract-plugin": "^2.6.1",
+    "postcss": "^8.4.39",
+    "serve": "^14.2.1",
+    "tailwindcss": "^3.4.4",
+    "typescript": "^5.3.3",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  },
+  "scripts": {
+    "start": "webpack serve --mode=development",
+    "start:https": "webpack serve --mode=development --https",
+    "build": "webpack build --mode=production",
+    "serve": "serve -p 3000 -s build",
+    "postinstall": "npm run post:wasm",
+    "post:wasm": "copyfiles -f \"node_modules/@geenee/bodytracking/dist/*.wasm\" public/",
+    "dev": "next dev"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
