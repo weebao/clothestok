@@ -16,27 +16,14 @@
     "jsx": "preserve",
     "target": "es5",
     "module": "esnext",
-    "lib": [
-      "esnext",
-      "webworker",
-      "dom",
-      "dom.iterable"
-    ],
+    "lib": ["esnext", "webworker", "dom", "dom.iterable"],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     }
   },
   "buildOptions": {
     "incremental": true
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }

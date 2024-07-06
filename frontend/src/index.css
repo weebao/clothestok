@@ -1,18 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: black;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
 .full-screen {
@@ -22,83 +22,83 @@ code {
 }
 
 .camera-switch {
-    position: absolute;
-    width: 48px;
-    height: 48px;
-    top: 8px;
-    right: 8px;
-    z-index: 1;
-    background-image: url("/switch.png");
-    background-size: contain;
-    background-color: transparent;
-    border: none;
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+  background-image: url("/switch.png");
+  background-size: contain;
+  background-color: transparent;
+  border: none;
 }
 
 .avatar-switch {
-    position: absolute;
-    width: 48px;
-    height: 48px;
-    top: 64px;
-    right: 8px;
-    z-index: 1;
-    background-image: url("/avatar.png");
-    background-size: contain;
-    background-color: transparent;
-    border: none;
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  top: 64px;
+  right: 8px;
+  z-index: 1;
+  background-image: url("/avatar.png");
+  background-size: contain;
+  background-color: transparent;
+  border: none;
 }
 
 .avatar-switch:checked {
-    background-image: url("/outfit.png");
+  background-image: url("/outfit.png");
 }
 
 input.avatar-switch[type="checkbox"] {
-    appearance: none;
-    -webkit-appearance: none;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 .record {
-    position: absolute;
-    width: 48px;
-    height: 48px;
-    top: 8px;
-    left: 8px;
-    z-index: 1;
-    background-image: url("/snapshot.png");
-    background-size: contain;
-    background-color: transparent;
-    border: none;
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  top: 8px;
+  left: 8px;
+  z-index: 1;
+  background-image: url("/snapshot.png");
+  background-size: contain;
+  background-color: transparent;
+  border: none;
 }
 
 .carousel {
-    position: absolute;
-    width: 100%;
-    height: 64px;
-    bottom: 16px;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
+  position: absolute;
+  width: 100%;
+  height: 64px;
+  bottom: 16px;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
 }
 
 .carousel-item {
-    background-size: contain;
-    background-color: transparent;
-    border: double 4px #008080;
-    border-radius: 50%;
-    overflow: hidden;
-    height: 64px;
-    width: 64px;
-    margin: auto 4px;
-    transition: .6s;
+  background-size: contain;
+  background-color: transparent;
+  border: double 4px #008080;
+  border-radius: 50%;
+  overflow: hidden;
+  height: 64px;
+  width: 64px;
+  margin: auto 4px;
+  transition: 0.6s;
 }
 
 .carousel input[type="radio"] {
-    background-color: #fff;
-    appearance: none;
-    -webkit-appearance: none;
+  background-color: #fff;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 .carousel-item:checked {
-    border: solid 4px #008080;
+  border: solid 4px #008080;
 }
 
 .dots {
@@ -131,19 +131,27 @@ input.avatar-switch[type="checkbox"] {
 }
 
 @keyframes dot-pulse {
-  0%, 80%, 100% {
+  0%,
+  80%,
+  100% {
     transform: scale(0);
     -webkit-transform: scale(0);
   }
   40% {
-    transform: scale(1.0);
-    -webkit-transform: scale(1.0);
+    transform: scale(1);
+    -webkit-transform: scale(1);
   }
 }
 
 @-webkit-keyframes dot-pulse {
-  0%, 80%, 100% { -webkit-transform: scale(0) }
-  40% { -webkit-transform: scale(1.0) }
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0);
+  }
+  40% {
+    -webkit-transform: scale(1);
+  }
 }
 
 .spinner {
@@ -161,33 +169,57 @@ input.avatar-switch[type="checkbox"] {
   height: 100%;
   left: 0;
   top: 0;
-  animation: spinner-dot 2.0s infinite ease-in-out both;
-  -webkit-animation: spinner-dot 2.0s infinite ease-in-out both;
+  animation: spinner-dot 2s infinite ease-in-out both;
+  -webkit-animation: spinner-dot 2s infinite ease-in-out both;
 }
 
 .spinner-dot:before {
-  content: '';
+  content: "";
   display: block;
   width: 25%;
   height: 25%;
   background-color: #008080;
   border-radius: 100%;
-  animation: spinner-dot-before 2.0s infinite ease-in-out both;
-  -webkit-animation: spinner-dot-before 2.0s infinite ease-in-out both;
+  animation: spinner-dot-before 2s infinite ease-in-out both;
+  -webkit-animation: spinner-dot-before 2s infinite ease-in-out both;
 }
 
-.spinner-dot:nth-child(1) { animation-delay: -1.1s; }
-.spinner-dot:nth-child(2) { animation-delay: -1.0s; }
-.spinner-dot:nth-child(3) { animation-delay: -0.9s; }
-.spinner-dot:nth-child(4) { animation-delay: -0.8s; }
-.spinner-dot:nth-child(5) { animation-delay: -0.7s; }
-.spinner-dot:nth-child(6) { animation-delay: -0.6s; }
-.spinner-dot:nth-child(1):before { animation-delay: -1.1s; }
-.spinner-dot:nth-child(2):before { animation-delay: -1.0s; }
-.spinner-dot:nth-child(3):before { animation-delay: -0.9s; }
-.spinner-dot:nth-child(4):before { animation-delay: -0.8s; }
-.spinner-dot:nth-child(5):before { animation-delay: -0.7s; }
-.spinner-dot:nth-child(6):before { animation-delay: -0.6s; }
+.spinner-dot:nth-child(1) {
+  animation-delay: -1.1s;
+}
+.spinner-dot:nth-child(2) {
+  animation-delay: -1s;
+}
+.spinner-dot:nth-child(3) {
+  animation-delay: -0.9s;
+}
+.spinner-dot:nth-child(4) {
+  animation-delay: -0.8s;
+}
+.spinner-dot:nth-child(5) {
+  animation-delay: -0.7s;
+}
+.spinner-dot:nth-child(6) {
+  animation-delay: -0.6s;
+}
+.spinner-dot:nth-child(1):before {
+  animation-delay: -1.1s;
+}
+.spinner-dot:nth-child(2):before {
+  animation-delay: -1s;
+}
+.spinner-dot:nth-child(3):before {
+  animation-delay: -0.9s;
+}
+.spinner-dot:nth-child(4):before {
+  animation-delay: -0.8s;
+}
+.spinner-dot:nth-child(5):before {
+  animation-delay: -0.7s;
+}
+.spinner-dot:nth-child(6):before {
+  animation-delay: -0.6s;
+}
 
 .spinner-container {
   position: absolute;
@@ -209,18 +241,24 @@ input.avatar-switch[type="checkbox"] {
 }
 
 @-webkit-keyframes spinner {
-  100% { -webkit-transform: rotate(360deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 
 @keyframes spinner-dot {
-  80%, 100% {
+  80%,
+  100% {
     transform: rotate(360deg);
     -webkit-transform: rotate(360deg);
   }
 }
 
 @-webkit-keyframes spinner-dot {
-  80%, 100% { -webkit-transform: rotate(360deg); }
+  80%,
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 
 @keyframes spinner-dot-before {
@@ -228,13 +266,19 @@ input.avatar-switch[type="checkbox"] {
     transform: scale(0.4);
     -webkit-transform: scale(0.4);
   }
-  100%, 0% {
-    transform: scale(1.0);
-    -webkit-transform: scale(1.0);
+  100%,
+  0% {
+    transform: scale(1);
+    -webkit-transform: scale(1);
   }
 }
 
 @-webkit-keyframes spinner-dot-before {
-  50% { -webkit-transform: scale(0.4); }
-  100%, 0% { -webkit-transform: scale(1.0); }
+  50% {
+    -webkit-transform: scale(0.4);
+  }
+  100%,
+  0% {
+    -webkit-transform: scale(1);
+  }
 }

@@ -1,0 +1,149 @@
+// From picturepan/devices.css on GitHub
+$device-purple: #342C3F;
+$device-purple-dark: darken($device-purple, 10%);
+$device-panel: #010101;
+
+.device {
+  position: relative;
+  transform: scale(1);
+  z-index: 1;
+  height: 868px;
+  width: 428px;
+
+  :global(.device-frame) {
+    background: $device-panel;
+    border: 1px solid $device-purple-dark;
+    border-radius: 68px;
+    box-shadow:
+      inset 0 0 4px 2px lighten($device-purple, 55%),
+      inset 0 0 0 6px $device-purple;
+    height: 868px;
+    padding: 19px;
+    width: 428px;
+  }
+
+  // 2556‑by‑1179-pixel resolution
+  :global(.device-screen) {
+    border-radius: 49px;
+    height: 830px;
+    width: 390px;
+  }
+
+  :global(.device-stripe) {
+    &::after,
+    &::before {
+      border: solid rgba($device-panel, 0.25);
+      border-width: 0 7px;
+      content: "";
+      height: 7px;
+      left: 0;
+      position: absolute;
+      width: 100%;
+      z-index: 9;
+    }
+    &::after {
+      top: 85px;
+    }
+    &::before {
+      bottom: 85px;
+    }
+  }
+
+  :global(.device-header) {
+    background: $device-panel;
+    border-radius: 20px;
+    height: 35px;
+    left: 50%;
+    margin-left: -60px;
+    position: absolute;
+    top: 29px;
+    width: 120px;
+  }
+
+  :global(.device-sensors) {
+    &::after,
+    &::before {
+      content: "";
+      position: absolute;
+    }
+    &::after {
+      background: $device-panel;
+      border-radius: 17px;
+      height: 33px;
+      left: 50%;
+      margin-left: -60px;
+      top: 30px;
+      width: 74px;
+    }
+    &::before {
+      background: radial-gradient(farthest-corner at 20% 20%, #6074bf 0, transparent 40%),
+        radial-gradient(farthest-corner at 80% 80%, #513785 0, #24555e 20%, transparent 50%);
+      box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
+      height: 9px;
+      left: 50%;
+      margin-left: 36px;
+      top: 42px;
+      width: 9px;
+    }
+  }
+
+  :global(.device-btns) {
+    background: $device-purple-dark;
+    border-radius: 2px;
+    height: 32px;
+    left: -2px;
+    position: absolute;
+    top: 115px;
+    width: 3px;
+
+    &::after,
+    &::before {
+      background: $device-purple-dark;
+      border-radius: 2px;
+      content: "";
+      height: 62px;
+      left: 0;
+      position: absolute;
+      width: 3px;
+    }
+
+    &::after {
+      top: 60px;
+    }
+    &::before {
+      top: 140px;
+    }
+  }
+
+  :global(.device-power) {
+    background: $device-purple-dark;
+    border-radius: 2px;
+    height: 100px;
+    right: -2px;
+    position: absolute;
+    top: 200px;
+    width: 3px;
+  }
+
+  :global(.device-home) {
+    &::after,
+    &::before {
+      border: solid rgba($device-panel, 0.25);
+      border-width: 6px 0;
+      content: "";
+      height: 6px;
+      position: absolute;
+      width: 6px;
+      z-index: 9;
+    }
+    &::after {
+      right: 86px;
+      top: 0;
+    }
+    &::before {
+      bottom: 0;
+      left: 86px;
+    }
+  }
+}
