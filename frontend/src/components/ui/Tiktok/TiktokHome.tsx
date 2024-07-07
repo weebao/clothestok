@@ -202,9 +202,9 @@ export const TiktokHome: React.FC = () => {
               <div className="relative w-full h-full bg-gradient-to-b from-yellow-500 to-accent flex items-center justify-center overflow-hidden snap-normal snap-start">
                 <motion.div initial={{ scale: 0.1 }} whileInView={{ scale: 1, transition: { type: "spring", damping: 5, stiffness: 100 } }}>
                   <h3 className="text-white font-semibold text-2xl mb-4 text-center">Great deals that fits your style!</h3>
-                  <div className="bg-white rounded-lg mx-auto w-[80%] px-4 py-6 flex flex-col items-center">
+                  <div className="bg-white rounded-lg mx-auto w-[90%] px-4 py-6 flex flex-col items-center">
                     <div className="bg-neutral-300 rounded-md w-1/2 aspect-square overflow-hidden mb-2 flex items-center justify-center">
-                      {!isFetching && recommendationList ? <img src={recommendationList[0]} alt="" /> : <DotLoader color="#FE2858" />}
+                      {!isFetching && recommendationList ? <img src={recommendationList[0]} className="w-full h-full" alt="" /> : <DotLoader color="#FE2858" />}
                     </div>
 
                     <div className="text-lg mb-4">
@@ -214,14 +214,14 @@ export const TiktokHome: React.FC = () => {
 
                     <div className="flex gap-2 font-semibold mb-6">
                       <button
-                        className="flex items-center gap-1 bg-cyan-300 hover:bg-cyan-200 transition-all duration-150 px-4 py-2 rounded-md"
+                        className="flex items-center gap-1 bg-cyan-300 hover:bg-cyan-200 transition-all duration-150 px-4 py-2 rounded-md text-nowrap"
                         onClick={openTryonDialog}
                       >
                         {isTryonBtnLoading ? <ClipLoader className="!w-6 !h-6" /> : <IconClothesTok />}
                         <span>Try it on</span>
                       </button>
                       <button
-                        className="flex items-center gap-1 bg-accent hover:bg-red-400 transition-all duration-150 text-white px-4 py-2 rounded-md"
+                        className="flex items-center gap-1 bg-accent hover:bg-red-400 transition-all duration-150 text-white px-4 py-2 rounded-md text-nowrap"
                         onClick={() => setAddToCart(true)}
                       >
                         {addToCart ? (

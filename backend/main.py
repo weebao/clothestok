@@ -7,8 +7,10 @@ from try_on import clothes_tryon
 from recommend import get_rec
 import requests
 import io 
+import numpy as np
+from PIL import Image
 from extract_pic import extract_pic_func
-from remove_bg import detect_and_extract_clothes
+from remove_bg import clothing_extractor, body_extractor
 
 load_dotenv()
 
@@ -34,14 +36,20 @@ async def root():
 async def recommend(humanFile: Annotated[bytes, File()]):
     # extract_pic + get recommended clothes   
     links = get_rec(humanFile)
+    human_bg_removed = np.array(body_extractor(humanFile))
+    body_image = Image.fromarray(human_bg_removed)
+    body_buffer = io.BytesIO()
+    body_image.save(body_buffer, format='WEBP')
     
     # try on best-suited
     response = requests.get(links[0])
     # remove background from clothes image
-    clothesImage = detect_and_extract_clothes(io.BytesIO(response.content))
-    
-    # try on clothes
-    tryOnUrl = clothes_tryon(humanFile, clothesImage)
+    bg_removed = np.array(clothing_extractor(response.content))
+    clothes_image = Image.fromarray(bg_removed)
+    clothes_buffer = io.BytesIO()
+    clothes_image.save(clothes_buffer, format='JPEG')
+    # print(response.content)
+    tryOnUrl = clothes_tryon(io.BytesIO(body_buffer.getvalue()), io.BytesIO(clothes_buffer.getvalue()))
     
     return {"bestFitLinks": links, "tryOnUrl": tryOnUrl} 
 

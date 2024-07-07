@@ -5,7 +5,7 @@ url = "https://levihsu-ootdiffusion.hf.space/queue/join?"
 session_hash = "u988s9pxmk"
 
 def upload_file(humanFile, clothesFile):
-    uploadUrl = "https://levihsu-ootdiffusion.hf.space/upload?upload_id=rj9swk3kwb"
+    uploadUrl = "https://levihsu-ootdiffusion.hf.space/upload?upload_id=svl5w8o9jba"
     humanPath = clothesPath = None 
     
     files = {'files': humanFile} 
@@ -21,6 +21,7 @@ def upload_file(humanFile, clothesFile):
 def clothes_tryon(humanFile, clothesFile):
 
     humanPath, clothesPath = upload_file(humanFile, clothesFile)
+    print(humanPath, clothesPath)
     payload = {
         "data": [
             {
@@ -66,6 +67,7 @@ def clothes_tryon(humanFile, clothesFile):
         for line in nextResponse.iter_lines():
             if line:
                 decoded_line = line.decode('utf-8')
+                print(decoded_line)
                 if decoded_line.startswith('data: '):
                     data = decoded_line[len('data: '):]
                     try:
