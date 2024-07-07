@@ -36,10 +36,10 @@ async def recommend(humanFile: Annotated[bytes, File()]):
     
     # try on best-suited
     response = requests.get(links[0])
+    print("humanFile: ", type(humanFile))
     tryOnUrl = clothes_tryon(humanFile, io.BytesIO(response.content))
     
     return {"bestFitLinks": links, "tryOnUrl": tryOnUrl} 
-
 
 
 @app.post("/tryon")
