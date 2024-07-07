@@ -8,13 +8,14 @@ from recommend import get_rec
 import requests
 import io 
 from extract_pic import extract_pic_func
+from remove_bg import detect_and_extract_clothes
 
 load_dotenv()
 
 app = FastAPI()
 
 origins = [
-    "http://localhost:3001",
+    "http://localhost:3000",
 ]
 
 app.add_middleware(
@@ -36,10 +37,14 @@ async def recommend(humanFile: Annotated[bytes, File()]):
     
     # try on best-suited
     response = requests.get(links[0])
-    print("humanFile: ", type(humanFile))
-    tryOnUrl = clothes_tryon(humanFile, io.BytesIO(response.content))
+    # remove background from clothes image
+    clothesImage = detect_and_extract_clothes(io.BytesIO(response.content))
+    
+    # try on clothes
+    tryOnUrl = clothes_tryon(humanFile, clothesImage)
     
     return {"bestFitLinks": links, "tryOnUrl": tryOnUrl} 
+
 
 
 @app.post("/tryon")

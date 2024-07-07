@@ -1,22 +1,29 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 
 interface ImageContextType {
-  imageUrl: string,
-  displayImageUrl: string,
-  setImageUrl: React.Dispatch<React.SetStateAction<string>>,
-  fetchRecommendation: () => {}
+  imageUrl: string;
+  displayImageUrl: string;
+  setImageUrl: React.Dispatch<React.SetStateAction<string>>;
+  fetchRecommendation: () => {};
+  isFetching: boolean;
+  recommendationList: string[];
+  tryOnImageUrl: string;
+  resetAll: () => void;
 }
 
 const ImageContext = createContext<ImageContextType | undefined>(undefined);
 
-export const ImageProvider = ({ children }: { children: React.ReactNode}) => {
+export const ImageProvider = ({ children }: { children: React.ReactNode }) => {
   const [imageUrl, setImageUrl] = useState<string>("");
   const [displayImageUrl, setDisplayedImageUrl] = useState<string>("");
+  const [tryOnImageUrl, setTryOnImageUrl] = useState<string>("");
   const [imageFormData, setImageFormData] = useState<FormData>(new FormData());
+  const [isFetching, setIsFetching] = useState<boolean>(false);
+  const [recommendationList, setRecommendationList] = useState<any>([]);
 
   const dataURLtoBlob = (dataURL: string) => {
     if (!dataURL) return new Blob();
-      
+
     const arr = dataURL.split(",");
     const matchResult = arr[0].match(/:(.*?);/);
     const mime = matchResult ? matchResult[1] : "";
@@ -32,23 +39,44 @@ export const ImageProvider = ({ children }: { children: React.ReactNode}) => {
   useEffect(() => {
     const blob = dataURLtoBlob(imageUrl);
     setDisplayedImageUrl(URL.createObjectURL(blob));
-    setImageFormData(new FormData());
-    imageFormData.append("files", imageUrl);
+    const newImageFormData = new FormData();
+    const imageFile = new File([blob], "upload.webp", { type: "image/webp" });
+    newImageFormData.append("humanFile", imageFile);
+    setImageFormData(newImageFormData);
   }, [imageUrl]);
 
   const fetchRecommendation = async () => {
-    const response = await fetch("http://127.0.0.1:8000/try_on", {
-      method: "POST",
-      body: imageFormData
-    });
+    try {
+      setIsFetching(true);
+      const response = await fetch("http://127.0.0.1:8000/recommend", {
+        method: "POST",
+        body: imageFormData,
+      });
+      console.log(response)
+      setIsFetching(false);
+      const data = await response.json();
+      setTryOnImageUrl(data["tryOnUrl"]);
+      setRecommendationList(data["bestFitLinks"])
+    } catch (error) {
+      alert("An error occurred while fetching recommendation.");
+    }
+  };
+
+  const resetAll = () => {
+    setImageUrl("");
+    setDisplayedImageUrl("");
+    setTryOnImageUrl("");
+    setImageFormData(new FormData());
+    setIsFetching(false);
+    setRecommendationList([]);
   }
 
   return (
-    <ImageContext.Provider value={{ imageUrl, displayImageUrl, setImageUrl, fetchRecommendation }}>
+    <ImageContext.Provider value={{ imageUrl, displayImageUrl, setImageUrl, fetchRecommendation, recommendationList, isFetching, tryOnImageUrl, resetAll }}>
       {children}
     </ImageContext.Provider>
   );
-}
+};
 
 export const useImageContext = () => {
   const context = useContext(ImageContext);
@@ -56,4 +84,4 @@ export const useImageContext = () => {
     throw new Error("ImageContext must be used within an ImageProvider");
   }
   return context;
-}
+};
