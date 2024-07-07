@@ -8,12 +8,10 @@ def upload_file(humanFile, clothesFile):
     uploadUrl = "https://levihsu-ootdiffusion.hf.space/upload?upload_id=4za1726butj"
     humanPath = clothesPath = None 
     
-    # files = {'files': open(humanPathFile, 'rb')} 
     files = {'files': humanFile} 
     response = requests.post(uploadUrl, files=files)
     humanPath = response.json()[0]
 
-    # files = {'files': open(clothesPathFile, 'rb')} 
     files = {'files': clothesFile} 
     response = requests.post(uploadUrl, files=files)
     clothesPath = response.json()[0]
@@ -83,7 +81,3 @@ def clothes_tryon(humanFile, clothesFile):
 
     else:
         print('Request failed with status code:', response.status_code)
-
-
-if __name__ == "__main__":
-    clothes_tryon("test.jpg", "cloth.jpg")

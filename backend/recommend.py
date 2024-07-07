@@ -7,6 +7,7 @@ import glob
 from PIL import Image
 from torch.utils.data import DataLoader, Dataset
 import os
+import json 
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = models.efficientnet_b2(pretrained=True)
@@ -74,6 +75,13 @@ similarities = cosine_similarity([query_features], dataset_features)[0]
 top_indices = np.argsort(similarities)[-5:][::-1]
 top_5_similar_images = [image_paths[idx] for idx in top_indices]
 
+def find_link_from_filename(filename):
+    with open('clothes.json', 'r') as json_file:
+        data = json.load(json_file)
+    return data[filename]
+
 print("Top 5 most similar images:")
 for idx, img_path in enumerate(top_5_similar_images, 1):
-    print(f"{idx}. {img_path}")
+    # process img_path or whatever to fit 
+    print(f"{idx}. {find_link_from_filename(img_path)}")
+
