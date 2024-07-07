@@ -4,22 +4,24 @@ import json
 url = "https://levihsu-ootdiffusion.hf.space/queue/join?"
 session_hash = "u988s9pxmk"
 
-def upload_file(humanPathFile, clothesPathFile):
+def upload_file(humanFile, clothesFile):
     uploadUrl = "https://levihsu-ootdiffusion.hf.space/upload?upload_id=4za1726butj"
     humanPath = clothesPath = None 
     
-    files = {'files': open(humanPathFile, 'rb')} 
+    # files = {'files': open(humanPathFile, 'rb')} 
+    files = {'files': humanFile} 
     response = requests.post(uploadUrl, files=files)
     humanPath = response.json()[0]
-                
-    files = {'files': open(clothesPathFile, 'rb')} 
+
+    # files = {'files': open(clothesPathFile, 'rb')} 
+    files = {'files': clothesFile} 
     response = requests.post(uploadUrl, files=files)
     clothesPath = response.json()[0]
     
     return humanPath, clothesPath
 
-def clothes_tryon(humanPathFile, clothesPathFile):
-    humanPath, clothesPath = upload_file(humanPathFile, clothesPathFile)
+def clothes_tryon(humanFile, clothesFile):
+    humanPath, clothesPath = upload_file(humanFile, clothesFile)
     payload = {
         "data": [
             {
