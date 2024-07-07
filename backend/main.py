@@ -8,6 +8,7 @@ from recommend import get_rec
 import requests
 import io 
 from extract_pic import extract_pic_func
+from remove_bg import clothing_extractor
 
 load_dotenv()
 
@@ -36,6 +37,7 @@ async def recommend(humanFile: Annotated[bytes, File()]):
     
     # try on best-suited
     response = requests.get(links[0])
+    remove_img = clothing_extractor(io.BytesIO(response.content))
     tryOnUrl = clothes_tryon(humanFile, io.BytesIO(response.content))
     
     return {"bestFitLinks": links, "tryOnUrl": tryOnUrl} 
