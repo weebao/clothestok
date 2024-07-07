@@ -1,3 +1,4 @@
+import logging
 import torch
 import torchvision.transforms as transforms
 from torchvision import models
@@ -8,6 +9,8 @@ from PIL import Image
 from torch.utils.data import DataLoader, Dataset
 import os
 import json 
+from extract_pic import extract_pic_func
+
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = models.efficientnet_b2(pretrained=True)
@@ -53,34 +56,51 @@ def load_embeddings(embedding_file):
     data = np.load(embedding_file, allow_pickle=True)
     return data['features'], data['image_paths']
 
-query_image_path = "/content/output/1.jpg_Upper-clothes.png"
-dataset_path = "/content/drive/MyDrive/images_original/*.jpg"
-embedding_file = "/content/image_embeddings.npz"
-
-query_image = Image.open(query_image_path).convert('RGB')
-query_tensor = preprocess(query_image).unsqueeze(0).to(device)
-with torch.no_grad():
-    query_features = model(query_tensor).squeeze().cpu().numpy()
-
-if os.path.exists(embedding_file):
-    dataset_features, image_paths = load_embeddings(embedding_file)
-else:
-    dataset_images = glob.glob(dataset_path)
-    dataset = ImageDataset(dataset_images)
-    data_loader = DataLoader(dataset, batch_size=128, shuffle=False, num_workers=2)
-    dataset_features, image_paths = extract_features_batch(model, data_loader)
-    save_embeddings(dataset_features, image_paths, embedding_file)
-
-similarities = cosine_similarity([query_features], dataset_features)[0]
-top_indices = np.argsort(similarities)[-5:][::-1]
-top_5_similar_images = [image_paths[idx] for idx in top_indices]
-
 def find_link_from_filename(filename):
     with open('clothes.json', 'r') as json_file:
         data = json.load(json_file)
     return data[filename]
 
-print("Top 5 most similar images:")
-for idx, img_path in enumerate(top_5_similar_images, 1):
-    # process img_path or whatever to fit 
-    print(f"{idx}. {find_link_from_filename(img_path)}")
+def process_link(link):
+    import re
+
+    # Extract the file ID from the given URL
+    match = re.search(r'/d/([^/]+)/', drive_link)
+    if not match:
+        raise ValueError("Invalid Google Drive file URL")
+    
+    file_id = match.group(1)
+    
+    # Construct the download link
+    download_link = f"https://drive.usercontent.google.com/download?id={file_id}&export=view&authuser=0"
+    
+    return download_link
+
+def get_rec(image): # image_path = "1.jpg"
+    embedding_file = "image_embeddings.npz"
+
+    query_image_array = extract_pic_func(image)
+    query_image = Image.fromarray(query_image_array).convert('RGB')
+    query_tensor = preprocess(query_image).unsqueeze(0).to(device)
+    with torch.no_grad():
+        query_features = model(query_tensor).squeeze().cpu().numpy()
+
+    if os.path.exists(embedding_file):
+        dataset_features, image_paths = load_embeddings(embedding_file)
+    else:
+        logging.error("Error: Embedding file not found.")
+
+    similarities = cosine_similarity([query_features], dataset_features)[0]
+    top_indices = np.argsort(similarities)[-5:][::-1]
+    top_5_similar_images = [image_paths[idx] for idx in top_indices]
+    links = []
+    for img_path in top_5_similar_images:
+        filename = img_path.split('/')[-1]
+        link = find_link_from_filename(filename)
+        links.append(process_link(link))
+    return links
+
+
+
+if __name__ == "__main__":
+    print(get_rec())
