@@ -54,8 +54,8 @@ export const TiktokShop = () => {
             ))
           ) : recommendationList.length === 0 ? <p className="col-span-2 text-center">No results yet. You might want to update your ClothesTok profile</p> : (
             recommendationList.map((item, index) => (
-              <div key={index} className="bg-neutral-50 aspect-square rounded-lg">
-                <iframe src={item} />
+              <div key={index} className="bg-neutral-50 aspect-square rounded-lg overflow-hidden flex items-center justify-center">
+                <img src={item} />
               </div>
             ))
           )}

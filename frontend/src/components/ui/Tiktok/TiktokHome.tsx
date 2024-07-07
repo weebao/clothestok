@@ -202,8 +202,8 @@ export const TiktokHome: React.FC = () => {
               <div className="relative w-full h-full bg-gradient-to-b from-yellow-500 to-accent flex items-center justify-center overflow-hidden snap-normal snap-start">
                 <motion.div initial={{ scale: 0.1 }} whileInView={{ scale: 1, transition: { type: "spring", damping: 5, stiffness: 100 } }}>
                   <h3 className="text-white font-semibold text-2xl mb-4 text-center">Great deals that fits your style!</h3>
-                  <div className="bg-white rounded-lg p-6 flex flex-col items-center">
-                    <div className="bg-neutral-300 rounded-md w-1/2 aspect-square mb-2 flex items-center justify-center">
+                  <div className="bg-white rounded-lg mx-auto w-[80%] px-4 py-6 flex flex-col items-center">
+                    <div className="bg-neutral-300 rounded-md w-1/2 aspect-square overflow-hidden mb-2 flex items-center justify-center">
                       {!isFetching && recommendationList ? <img src={recommendationList[0]} alt="" /> : <DotLoader color="#FE2858" />}
                     </div>
 
@@ -212,7 +212,7 @@ export const TiktokHome: React.FC = () => {
                       <span className="text-accent font-bold">$19.99</span>
                     </div>
 
-                    <div className="flex gap-2 font-semibold mb-8">
+                    <div className="flex gap-2 font-semibold mb-6">
                       <button
                         className="flex items-center gap-1 bg-cyan-300 hover:bg-cyan-200 transition-all duration-150 px-4 py-2 rounded-md"
                         onClick={openTryonDialog}
@@ -244,13 +244,15 @@ export const TiktokHome: React.FC = () => {
                 </motion.div>
                 {openTryon ? (
                   <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" onClick={(e) => closeTryonDialog(e)}>
-                    <div className="relative w-[80%] bg-white p-6 rounded-lg">
+                    <div className="relative w-[80%] bg-white p-8 rounded-lg">
                       <button className="absolute top-2 right-2" onClick={() => setOpenTryon(false)}>
                         <XMarkIcon className="w-6 h-6" />
                       </button>
                       <div className="flex items-center justify-center">
                         <DotLoader loading={isImageLoading} color="#FE2858" />
-                        <img src={tryOnImageUrl} alt="Try on" />
+                        <div className="rounded-md overflow-hidden aspect-square">
+                          <img src={tryOnImageUrl} alt="Try on" className="object-contain" />
+                        </div>
                       </div>
                     </div>
                   </div>
