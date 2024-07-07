@@ -1,12 +1,15 @@
-import React from "react";
-import { TiktokScreen } from "./TiktokScreen";
+import React, { useState } from "react";
+import { TiktokPage } from "./TiktokPage";
 import { TiktokNavbar } from "./TiktokNavbar";
 
 export const Tiktok: React.FC = () => {
+  const [selectedPage, setSelectedPage] = useState<number>(0);
+
+
   return (
     <div className="w-full h-full flex flex-col">
-      <TiktokScreen />
-      <TiktokNavbar selected={0} />
+      <TiktokPage selectedPage={selectedPage} />
+      <TiktokNavbar selected={selectedPage} setSelected={setSelectedPage} />
     </div>
   );
 };

@@ -12,7 +12,7 @@ export const Iphone14Frame: React.FC<Iphone14FrameProps> = ({ children }) => {
       <div className="device-frame">
         <div className="device-screen overflow-hidden">
           { children }
-          <div className="absolute left-1/2 bottom-6 -translate-x-1/2 w-[160px] h-[4px] rounded-full bg-white"></div>
+          <div className="absolute left-1/2 bottom-7 -translate-x-1/2 w-[160px] h-[4px] rounded-full bg-white z-[100]"></div>
         </div>
       </div>
       <div className="device-stripe"></div>

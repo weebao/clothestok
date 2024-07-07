@@ -3,7 +3,7 @@ import type { IconType } from "./types";
 
 export const IconTiktokFriendsOutlined: React.FC<IconType> = ({ className }) => {
   return (
-    <svg width="29" height="28" viewBox="0 0 29 28" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <svg className={className} width="29" height="28" viewBox="0 0 29 28" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"

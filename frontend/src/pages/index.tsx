@@ -13,7 +13,7 @@ const Home: NextPage = () => {
           <p className="text-xl">Personalize how you shop on TikTok with AR</p>
         </div>
       </div>
-      <Link href="/ar">
+      <Link href="/try">
         <button className="px-8 py-2 bg-accent rounded-md font-semibold hover:bg-accent-hover transition-all duration-150 active:scale-95">
           Try Now
         </button>

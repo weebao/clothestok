@@ -10,7 +10,7 @@ export const IconTiktokPost: React.FC<IconType> = ({ className }) => {
         fill-rule="evenodd"
         clip-rule="evenodd"
         d="M12.5 0C8.08172 0 4.5 3.58172 4.5 8V21C4.5 25.4183 8.08172 29 12.5 29H32.5C36.9183 29 40.5 25.4183 40.5 21V8C40.5 3.58172 36.9183 0 32.5 0H12.5ZM21.5 8H24.5V13H29.5V16H24.5V21H21.5V16H16.5V13H21.5V8Z"
-        fill="white"
+        fill="currentColor"
       />
     </svg>
   );

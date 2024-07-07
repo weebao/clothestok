@@ -13,29 +13,30 @@ import {
 
 type TiktokNavbarType = {
   selected: number;
+  setSelected: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export const TiktokNavbar: React.FC<TiktokNavbarType> = ({ selected }) => {
+export const TiktokNavbar: React.FC<TiktokNavbarType> = ({ selected, setSelected }) => {
   return (
-    <div className="w-full px-8 pt-2 pb-8 bg-neutral-950 flex items-center justify-between text-white">
-      <div className="flex flex-col items-center">
-        {selected === 0 ? <IconTiktokHomeSolid /> : <IconTiktokHomeOutlined className="text-stone-300" />}
-        <p className={`text-xs ${selected === 0 ? "" : "text-stone-300"}`}>Home</p>
+    <div className={`w-full px-8 pt-2 pb-8 ${selected === 0 ? 'bg-neutral-950 text-white' : 'bg-neutral-50 text-neutral-950'} flex items-center justify-between z-10`}>
+      <div className="flex flex-col items-center hover:cursor-pointer" onClick={() => setSelected(0)}>
+        {selected === 0 ? <IconTiktokHomeSolid /> : <IconTiktokHomeOutlined className="text-stone-400" />}
+        <p className={`text-xs ${selected === 0 ? "" : "text-stone-400"}`}>Home</p>
       </div>
       <div className="flex flex-col items-center">
-        {selected === 1 ? <IconTiktokFriendsSolid /> : <IconTiktokFriendsOutlined className="text-stone-300" />}
-        <p className={`text-xs ${selected === 1 ? "" : "text-stone-300"}`}>Friends</p>
+        {selected === 1 ? <IconTiktokFriendsSolid /> : <IconTiktokFriendsOutlined className="text-stone-400" />}
+        <p className={`text-xs ${selected === 1 ? "" : "text-stone-400"}`}>Friends</p>
       </div>
       <div>
         <IconTiktokPost />
       </div>
       <div className="flex flex-col items-center">
-        {selected === 2 ? <IconTiktokInboxSolid /> : <IconTiktokInboxOutlined className="text-stone-300" />}
-        <p className={`text-xs ${selected === 2 ? "" : "text-stone-300"}`}>Inbox</p>
+        {selected === 2 ? <IconTiktokInboxSolid /> : <IconTiktokInboxOutlined className="text-stone-400" />}
+        <p className={`text-xs ${selected === 2 ? "" : "text-stone-400"}`}>Inbox</p>
       </div>
-      <div className="flex flex-col items-center">
-        {selected === 3 ? <IconTiktokProfileSolid /> : <IconTiktokProfileOutlined className="text-stone-300" />}
-        <p className={`text-xs ${selected === 3 ? "" : "text-stone-300"}`}>Profile</p>
+      <div className="flex flex-col items-center hover:cursor-pointer" onClick={() => setSelected(3)}>
+        {selected === 3 ? <IconTiktokProfileSolid /> : <IconTiktokProfileOutlined className="text-stone-400" />}
+        <p className={`text-xs ${selected === 3 ? "" : "text-stone-400"}`}>Profile</p>
       </div>
     </div>
   );

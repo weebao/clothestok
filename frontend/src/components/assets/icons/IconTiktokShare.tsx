@@ -1,9 +1,9 @@
 import React from "react";
 import type { IconType } from "./types";
 
-export const IconTiktokBookmark: React.FC<IconType> = ({ className }) => {
+export const IconTiktokShare: React.FC<IconType> = ({ className }) => {
   return (
-    <svg width="31" height="30" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg className={className} width="31" height="30" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g filter="url(#filter0_d_528_314)">
         <path
           fill-rule="evenodd"
