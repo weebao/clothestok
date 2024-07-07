@@ -2,7 +2,7 @@ import requests
 import json 
 
 url = "https://levihsu-ootdiffusion.hf.space/queue/join?"
-session_hash = "bdpzeu890ip"
+session_hash = "u988s9pxmk"
 
 def clothes_tryon(humanImagePath, humanImageUrl, clothesImagePath, clothesImageUrl):
     payload = {
@@ -59,6 +59,7 @@ def clothes_tryon(humanImagePath, humanImageUrl, clothesImagePath, clothesImageU
                         if json_data.get('msg') == 'process_completed':
                             print('Output image link:')
                             print(json_data['output']['data'][0][0]['image']['url'])
+                            return json_data['output']['data'][0][0]['image']['url']
                             break 
                             
                     except json.JSONDecodeError:
