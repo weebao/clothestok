@@ -13,8 +13,8 @@ def upload_file(humanFile, clothesFile):
     response = requests.post(uploadUrl, files=files)
     humanPath = response.json()[0]
 
-    # files = {'files': open(clothesPathFile, 'rb')} 
-    files = {'files': clothesFile} 
+    files = {'files': open("./cloth.jpg", 'rb')} 
+    # files = {'files': clothesFile} 
     response = requests.post(uploadUrl, files=files)
     clothesPath = response.json()[0]
     

@@ -9,8 +9,7 @@ export const TiktokProfile: React.FC = () => {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [openCamera, setOpenCampera] = useState<boolean>(false);
   const webcamRef = useRef<any>(null);
-  const { imageUrl, displayImageUrl, setImageUrl } = useImageContext();
-  const [displayedImg, setDisplayedImg] = useState<string>("");
+  const { imageUrl, displayImageUrl, setImageUrl, fetchRecommendation } = useImageContext();
 
   const closeDialog = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
@@ -97,6 +96,7 @@ export const TiktokProfile: React.FC = () => {
                       className="px-4 py-2 bg-primary text-neutral-950 rounded-lg"
                       onClick={() => {
                         setOpenDialog(false);
+                        fetchRecommendation();
                       }}
                     >
                       Save

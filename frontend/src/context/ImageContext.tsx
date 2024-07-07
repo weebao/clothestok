@@ -5,6 +5,9 @@ interface ImageContextType {
   displayImageUrl: string,
   setImageUrl: React.Dispatch<React.SetStateAction<string>>,
   fetchRecommendation: () => {}
+  isFetching: boolean,
+  recommendationList: any,
+  tryOnImageUrl: string,
 }
 
 const ImageContext = createContext<ImageContextType | undefined>(undefined);
@@ -12,7 +15,10 @@ const ImageContext = createContext<ImageContextType | undefined>(undefined);
 export const ImageProvider = ({ children }: { children: React.ReactNode}) => {
   const [imageUrl, setImageUrl] = useState<string>("");
   const [displayImageUrl, setDisplayedImageUrl] = useState<string>("");
+  const [tryOnImageUrl, setTryOnImageUrl] = useState<string>("");
   const [imageFormData, setImageFormData] = useState<FormData>(new FormData());
+  const [isFetching, setIsFetching] = useState<boolean>(false);
+  const [recommendationList, setRecommendationList] = useState<any>([]);
 
   const dataURLtoBlob = (dataURL: string) => {
     if (!dataURL) return new Blob();
@@ -32,19 +38,28 @@ export const ImageProvider = ({ children }: { children: React.ReactNode}) => {
   useEffect(() => {
     const blob = dataURLtoBlob(imageUrl);
     setDisplayedImageUrl(URL.createObjectURL(blob));
-    setImageFormData(new FormData());
-    imageFormData.append("files", imageUrl);
+    const newImageFormData = new FormData();
+    newImageFormData.append("humanFile", imageUrl);
+    newImageFormData.append("clothesFile", imageUrl);
+    setImageFormData(newImageFormData);
+    console.log(newImageFormData.get("humanFile"))
   }, [imageUrl]);
 
   const fetchRecommendation = async () => {
-    const response = await fetch("http://127.0.0.1:8000/try_on", {
+    
+    setIsFetching(true);
+    const response = await fetch("http://127.0.0.1:8000/tryon", {
       method: "POST",
       body: imageFormData
     });
+    setIsFetching(false);
+    const data = await response.json();
+    setTryOnImageUrl(data["tryOnImageUrl"]);
+    console.log(data["tryOnImageUrl"])
   }
 
   return (
-    <ImageContext.Provider value={{ imageUrl, displayImageUrl, setImageUrl, fetchRecommendation }}>
+    <ImageContext.Provider value={{ imageUrl, displayImageUrl, setImageUrl, fetchRecommendation, recommendationList, isFetching, tryOnImageUrl }}>
       {children}
     </ImageContext.Provider>
   );
