@@ -25,6 +25,18 @@ app.add_middleware(
 async def root():
     return {"message": "Hello World"}
 
+@app.post('/recommend')
+async def recommend(humanFile: Annotated[bytes, File()]):
+    # extract_pic 
+    
+    # get recommended clothes 
+    
+    # try on best-suited
+    
+    # return recommended clothes + try on 
+    
+    
+
 @app.post("/tryon")
 async def tryon_endpoint(humanFile: Annotated[bytes, File()], clothesFile: Annotated[bytes, File()]):
     try:        

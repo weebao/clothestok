@@ -84,4 +84,3 @@ print("Top 5 most similar images:")
 for idx, img_path in enumerate(top_5_similar_images, 1):
     # process img_path or whatever to fit 
     print(f"{idx}. {find_link_from_filename(img_path)}")
-
