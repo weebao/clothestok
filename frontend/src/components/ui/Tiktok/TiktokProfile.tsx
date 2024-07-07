@@ -79,7 +79,7 @@ export const TiktokProfile: React.FC = () => {
             </button>
             <div className="flex flex-col items-center">
               <h2 className="text-xl font-bold mb-2 text-center">ClothesTok</h2>
-              {displayImageUrl ? (
+              {displayImageUrl && displayImageUrl !== "" ? (
                 <>
                   <img src={displayImageUrl} alt="captured" className="w-64 h-64 object-cover rounded-lg mb-4" />
                   <div className="flex gap-2 font-semibold">

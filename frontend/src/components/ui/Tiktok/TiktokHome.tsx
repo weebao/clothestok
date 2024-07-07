@@ -2,9 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { IconTiktokLike, IconTiktokComment, IconTiktokBookmark, IconTiktokShare, IconClothesTok } from "@/components/assets/icons";
 import { PlusIcon, MagnifyingGlassIcon } from "@heroicons/react/24/solid";
-import { ShoppingCartIcon, CheckIcon } from "@heroicons/react/24/outline";
+import { ShoppingCartIcon, CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { ClipLoader, DotLoader } from "react-spinners";
 
 import { TiktokShop } from "./TiktokShop";
+import { useImageContext } from "@/context/ImageContext";
 
 export const TiktokHome: React.FC = () => {
   const [vids, setVids] = useState<any>(null);
@@ -14,6 +16,11 @@ export const TiktokHome: React.FC = () => {
   const [scrollStartY, setScrollStartY] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [addToCart, setAddToCart] = useState<boolean>(false);
+  const [openTryon, setOpenTryon] = useState<boolean>(false);
+  const [isTryonBtnLoading, setIsTryonBtnLoading] = useState<boolean>(false);
+  const [isImageLoading, setIsImageLoading] = useState<boolean>(false);
+
+  const { recommendationList, tryOnImageUrl, isFetching } = useImageContext();
 
   const tabUnderline = (selectedTab: number) => {
     switch (selectedTab) {
@@ -45,6 +52,20 @@ export const TiktokHome: React.FC = () => {
 
   const onMouseUp = () => {
     setDragging(false);
+  };
+
+  const openTryonDialog = () => {
+    if (!isFetching && tryOnImageUrl) {
+      setOpenTryon(true);
+    } else {
+      setIsTryonBtnLoading(true);
+    }
+  }
+
+  const closeTryonDialog = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      setOpenTryon(false);
+    }
   };
 
   useEffect(() => {
@@ -99,6 +120,12 @@ export const TiktokHome: React.FC = () => {
       }, 2000);
     }
   }, [addToCart]);
+
+  useEffect(() => {
+    if (tryOnImageUrl) {
+      setIsTryonBtnLoading(false);
+    }
+  }, [tryOnImageUrl]);
 
   return (
     <div className="relative w-full h-full">
@@ -174,9 +201,11 @@ export const TiktokHome: React.FC = () => {
               ))}
               <div className="relative w-full h-full bg-gradient-to-b from-yellow-500 to-accent flex items-center justify-center overflow-hidden snap-normal snap-start">
                 <motion.div initial={{ scale: 0.1 }} whileInView={{ scale: 1, transition: { type: "spring", damping: 5, stiffness: 100 } }}>
-                  <h3 className="text-white font-semibold text-xl mb-4 text-center">Great deals that fits your style!</h3>
+                  <h3 className="text-white font-semibold text-2xl mb-4 text-center">Great deals that fits your style!</h3>
                   <div className="bg-white rounded-lg p-6 flex flex-col items-center">
-                    <div className="bg-neutral-300 rounded-md w-1/2 aspect-square mb-2"></div>
+                    <div className="bg-neutral-300 rounded-md w-1/2 aspect-square mb-2 flex items-center justify-center">
+                      {!isFetching && recommendationList ? <img src={recommendationList[0]} alt="" /> : <DotLoader color="#FE2858" />}
+                    </div>
 
                     <div className="text-lg mb-4">
                       <span className="text-neutral-400 line-through mr-2">$59.99</span>
@@ -184,8 +213,11 @@ export const TiktokHome: React.FC = () => {
                     </div>
 
                     <div className="flex gap-2 font-semibold mb-8">
-                      <button className="flex items-center gap-1 bg-cyan-300 hover:bg-cyan-200 transition-all duration-150 px-4 py-2 rounded-md">
-                        <IconClothesTok />
+                      <button
+                        className="flex items-center gap-1 bg-cyan-300 hover:bg-cyan-200 transition-all duration-150 px-4 py-2 rounded-md"
+                        onClick={openTryonDialog}
+                      >
+                        {isTryonBtnLoading ? <ClipLoader className="!w-6 !h-6" /> : <IconClothesTok />}
                         <span>Try it on</span>
                       </button>
                       <button
@@ -210,6 +242,19 @@ export const TiktokHome: React.FC = () => {
                     </div>
                   </div>
                 </motion.div>
+                {openTryon ? (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" onClick={(e) => closeTryonDialog(e)}>
+                    <div className="relative w-[80%] bg-white p-6 rounded-lg">
+                      <button className="absolute top-2 right-2" onClick={() => setOpenTryon(false)}>
+                        <XMarkIcon className="w-6 h-6" />
+                      </button>
+                      <div className="flex items-center justify-center">
+                        <DotLoader loading={isImageLoading} color="#FE2858" />
+                        <img src={tryOnImageUrl} alt="Try on" />
+                      </div>
+                    </div>
+                  </div>
+                ) : null}
               </div>
             </>
           )}
