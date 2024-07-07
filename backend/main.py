@@ -31,12 +31,7 @@ async def root():
 
 @app.post('/recommend')
 async def recommend(humanFile: Annotated[bytes, File()]):
-    # extract_pic + get recommended clothes 
-    # img_path = "humanfile.jpg"
-    # with open(img_path, 'wb') as f:
-    #     f.write(humanFile)
-    # links = get_rec(img_path)
-    
+    # extract_pic + get recommended clothes   
     links = get_rec(humanFile)
     
     # try on best-suited
