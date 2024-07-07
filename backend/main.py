@@ -4,6 +4,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Annotated
 from try_on import clothes_tryon
+from recommend import get_rec
+import requests
+import io 
+
 
 load_dotenv()
 
@@ -24,6 +28,22 @@ app.add_middleware(
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
+
+@app.post('/recommend')
+async def recommend(humanFile: Annotated[bytes, File()]):
+    # extract_pic + get recommended clothes 
+    # img_path = "humanfile.jpg"
+    # with open(img_path, 'wb') as f:
+    #     f.write(humanFile)
+    # links = get_rec(img_path)
+    
+    links = get_rec(humanFile)
+    
+    # try on best-suited
+    response = requests.get(links[0])
+    tryOnUrl = clothes_tryon(humanFile, io.BytesIO(response.content))
+    
+    return links, tryOnUrl
 
 @app.post("/tryon")
 async def tryon_endpoint(humanFile: Annotated[bytes, File()], clothesFile: Annotated[bytes, File()]):
