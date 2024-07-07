@@ -72,7 +72,9 @@ def process_link(link):
     file_id = match.group(1)
     
     # Construct the download link
-    download_link = f"https://drive.usercontent.google.com/download?id={file_id}&export=view&authuser=0"
+    # download_link = f"https://drive.usercontent.google.com/download?id={file_id}&export=view&authuser=0"
+    
+    download_link = f"https://drive.google.com/thumbnail?id={file_id}&sz=w1000"
     
     return download_link
 
