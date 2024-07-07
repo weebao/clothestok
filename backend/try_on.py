@@ -2,14 +2,29 @@ import requests
 import json 
 
 url = "https://levihsu-ootdiffusion.hf.space/queue/join?"
-session_hash = "bdpzeu890ip"
+session_hash = "u988s9pxmk"
 
-def clothes_tryon(humanImagePath, humanImageUrl, clothesImagePath, clothesImageUrl):
+def upload_file(humanPathFile, clothesPathFile):
+    uploadUrl = "https://levihsu-ootdiffusion.hf.space/upload?upload_id=4za1726butj"
+    humanPath = clothesPath = None 
+    
+    files = {'files': open(humanPathFile, 'rb')} 
+    response = requests.post(uploadUrl, files=files)
+    humanPath = response.json()[0]
+                
+    files = {'files': open(clothesPathFile, 'rb')} 
+    response = requests.post(uploadUrl, files=files)
+    clothesPath = response.json()[0]
+    
+    return humanPath, clothesPath
+
+def clothes_tryon(humanPathFile, clothesPathFile):
+    humanPath, clothesPath = upload_file(humanPathFile, clothesPathFile)
     payload = {
         "data": [
             {
-                "path": humanImagePath, # "/tmp/gradio/0dc2e5ca0e97bcd0c46950316bda838a46167da4/meou.png", 
-                "url": humanImageUrl, # "https://levihsu-ootdiffusion.hf.space/file=/tmp/gradio/0dc2e5ca0e97bcd0c46950316bda838a46167da4/meou.png",
+                "path": humanPath, # "/tmp/gradio/0dc2e5ca0e97bcd0c46950316bda838a46167da4/meou.png", 
+                "url": "https://levihsu-ootdiffusion.hf.space/file=" + humanPath, # "https://levihsu-ootdiffusion.hf.space/file=/tmp/gradio/0dc2e5ca0e97bcd0c46950316bda838a46167da4/meou.png",
                 "size": None,
                 "mime_type": "image/png",
                 "meta": {
@@ -17,8 +32,8 @@ def clothes_tryon(humanImagePath, humanImageUrl, clothesImagePath, clothesImageU
                 }
             },
             {
-                "path": clothesImagePath, # "/tmp/gradio/17c62353c027a67af6f4c6e8dccce54fba3e1e43/048554_1.jpg"
-                "url":  clothesImageUrl, #"https://levihsu-ootdiffusion.hf.space/file=/tmp/gradio/17c62353c027a67af6f4c6e8dccce54fba3e1e43/048554_1.jpg",
+                "path": clothesPath, # "/tmp/gradio/17c62353c027a67af6f4c6e8dccce54fba3e1e43/048554_1.jpg"
+                "url":  "https://levihsu-ootdiffusion.hf.space/file=" + clothesPath, #"https://levihsu-ootdiffusion.hf.space/file=/tmp/gradio/17c62353c027a67af6f4c6e8dccce54fba3e1e43/048554_1.jpg",
                 "size": None,
                 "mime_type": None,
                 "is_stream": False,
@@ -59,7 +74,7 @@ def clothes_tryon(humanImagePath, humanImageUrl, clothesImagePath, clothesImageU
                         if json_data.get('msg') == 'process_completed':
                             print('Output image link:')
                             print(json_data['output']['data'][0][0]['image']['url'])
-                            break 
+                            return json_data['output']['data'][0][0]['image']['url']
                             
                     except json.JSONDecodeError:
                         print('Failed to decode JSON:', decoded_line)
@@ -69,8 +84,4 @@ def clothes_tryon(humanImagePath, humanImageUrl, clothesImagePath, clothesImageU
 
 
 if __name__ == "__main__":
-    humanImagePath = "/tmp/gradio/0dc2e5ca0e97bcd0c46950316bda838a46167da4/meou.png"
-    humanImageUrl = "https://levihsu-ootdiffusion.hf.space/file=/tmp/gradio/0dc2e5ca0e97bcd0c46950316bda838a46167da4/meou.png"
-    clothesImagePath = "/tmp/gradio/17c62353c027a67af6f4c6e8dccce54fba3e1e43/048554_1.jpg"
-    clothesImageUrl = "https://levihsu-ootdiffusion.hf.space/file=/tmp/gradio/17c62353c027a67af6f4c6e8dccce54fba3e1e43/048554_1.jpg"
-    clothes_tryon(humanImagePath, humanImageUrl, clothesImagePath, clothesImageUrl)
+    clothes_tryon("test.jpg", "cloth.jpg")
