@@ -25,15 +25,14 @@ async def root():
     return {"message": "Hello World"}
 
 class TryonRequest(BaseModel):
-    humanImagePath: str 
-    humanImageUrl: str
-    clothesImagePath: str 
-    clothesImageUrl: str
+    humanPathFile: str
+    clothesPathFile: str 
     
 @app.post("/tryon")
 def tryon_endpoint(request: TryonRequest):
     try:
-        imageUrl = clothes_tryon(request.humanImagePath, request.humanImageUrl, request.clothesImagePath,request.clothesImageUrl)
+        imageUrl = clothes_tryon(request.humanPathFile, request.clothesPathFile)
         return {"imageUrl": imageUrl}
+    
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
