@@ -7,7 +7,7 @@ from try_on import clothes_tryon
 from recommend import get_rec
 import requests
 import io 
-
+from extract_pic import extract_pic_func
 
 load_dotenv()
 
@@ -41,6 +41,8 @@ async def recommend(humanFile: Annotated[bytes, File()]):
     
     # try on best-suited
     response = requests.get(links[0])
+    
+    print('trying on clothes')
     tryOnUrl = clothes_tryon(humanFile, io.BytesIO(response.content))
     
     return links, tryOnUrl

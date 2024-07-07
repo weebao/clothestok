@@ -110,13 +110,16 @@ def save_clothing_images(image, pred_seg):
     return clothing_image
 
 def extract_pic_func(image): # image_path = "1.jpg"
+    
     # image_path = image_path
     # image_name = os.path.splitext(os.path.basename(image_path))[0]
     # output_dir = pathlib.Path("output")
     # output_dir.mkdir(exist_ok=True)
     
     logging.basicConfig(level=logging.INFO)
-    nparr = np.frombuffer(image.getvalue(), np.uint8)
+    logging.info('inside extract_pic_func')
+    
+    nparr = np.frombuffer(image, np.uint8)
 
     # Decode numpy array to OpenCV image format
     image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
@@ -136,12 +139,3 @@ def extract_pic_func(image): # image_path = "1.jpg"
     logging.info("Processing completed.")
     return clothing_img
 
-
-# if __name__ == '__main__':
-#     clothes = extract_pic_func()
-#     cv2.imshow("Clothes", clothes)
-#     cv2.waitKey(0)
-#     cv2.destroyAllWindows()
-#     del processor
-#     del model
-#     torch.cuda.empty_cache()
