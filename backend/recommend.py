@@ -65,7 +65,7 @@ def process_link(link):
     import re
 
     # Extract the file ID from the given URL
-    match = re.search(r'/d/([^/]+)/', drive_link)
+    match = re.search(r'/d/([^/]+)/', link)
     if not match:
         raise ValueError("Invalid Google Drive file URL")
     
@@ -80,6 +80,7 @@ def get_rec(image): # image_path = "1.jpg"
     embedding_file = "image_embeddings.npz"
 
     query_image_array = extract_pic_func(image)
+    
     query_image = Image.fromarray(query_image_array).convert('RGB')
     query_tensor = preprocess(query_image).unsqueeze(0).to(device)
     with torch.no_grad():
@@ -98,6 +99,7 @@ def get_rec(image): # image_path = "1.jpg"
         filename = img_path.split('/')[-1]
         link = find_link_from_filename(filename)
         links.append(process_link(link))
+    
     return links
 
 

@@ -7,7 +7,7 @@ from try_on import clothes_tryon
 from recommend import get_rec
 import requests
 import io 
-
+from extract_pic import extract_pic_func
 
 load_dotenv()
 
@@ -43,7 +43,9 @@ async def recommend(humanFile: Annotated[bytes, File()]):
     response = requests.get(links[0])
     tryOnUrl = clothes_tryon(humanFile, io.BytesIO(response.content))
     
-    return links, tryOnUrl
+    return {"bestFitLinks": links, "tryOnUrl": tryOnUrl} 
+
+
 
 @app.post("/tryon")
 async def tryon_endpoint(humanFile: Annotated[bytes, File()], clothesFile: Annotated[bytes, File()]):
