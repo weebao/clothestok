@@ -5,7 +5,7 @@ url = "https://levihsu-ootdiffusion.hf.space/queue/join?"
 session_hash = "u988s9pxmk"
 
 def upload_file(humanFile, clothesFile):
-    uploadUrl = "https://levihsu-ootdiffusion.hf.space/upload?upload_id=4za1726butj"
+    uploadUrl = "https://levihsu-ootdiffusion.hf.space/upload?upload_id=rj9swk3kwb"
     humanPath = clothesPath = None 
     
     files = {'files': humanFile} 
@@ -19,6 +19,7 @@ def upload_file(humanFile, clothesFile):
     return humanPath, clothesPath
 
 def clothes_tryon(humanFile, clothesFile):
+
     humanPath, clothesPath = upload_file(humanFile, clothesFile)
     payload = {
         "data": [
