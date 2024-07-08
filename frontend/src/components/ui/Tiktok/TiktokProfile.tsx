@@ -4,12 +4,14 @@ import Webcam from "react-webcam";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { BookmarkIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useImageContext } from "@/context/ImageContext";
+import { useIsTouchDevice } from "@/hooks/useIsTouchDevice";
 
 export const TiktokProfile: React.FC = () => {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [openCamera, setOpenCampera] = useState<boolean>(false);
   const webcamRef = useRef<any>(null);
   const { imageUrl, displayImageUrl, setImageUrl, fetchRecommendation } = useImageContext();
+  const { isTouchDevice } = useIsTouchDevice();
 
   const closeDialog = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
@@ -28,7 +30,7 @@ export const TiktokProfile: React.FC = () => {
 
   return (
     <div className="relative w-full h-full bg-neutral-100">
-      <div className="px-6 pt-14 pb-2 flex items-center justify-between">
+      <div className={`px-6 ${isTouchDevice ? 'pt-8' : 'pt-14'} pb-2 flex items-center justify-between`}>
         <IconTiktokAddAccount />
         <div className="flex items-center gap-2">
           <div className="font-bold">Name</div>

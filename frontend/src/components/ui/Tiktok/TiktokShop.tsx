@@ -16,7 +16,7 @@ export const TiktokShop = () => {
   }, [recommendationList]);
 
   return (
-    <div className="w-full h-full py-24 px-4 overflow-y-scroll no-scrollbar">
+    <div className="w-full h-full py-24 px-4 overflow-y-scroll no-scrollbar bg-neutral-950">
       <div className="relative mb-2">
         <MagnifyingGlassIcon className="absolute w-5 h-5 top-2 left-2 text-white" />
         <input

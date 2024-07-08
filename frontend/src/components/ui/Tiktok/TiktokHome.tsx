@@ -7,6 +7,7 @@ import { ClipLoader, DotLoader } from "react-spinners";
 
 import { TiktokShop } from "./TiktokShop";
 import { useImageContext } from "@/context/ImageContext";
+import { useIsTouchDevice } from "@/hooks/useIsTouchDevice";
 
 export const TiktokHome: React.FC = () => {
   const [vids, setVids] = useState<any>(null);
@@ -21,6 +22,7 @@ export const TiktokHome: React.FC = () => {
   const [isImageLoading, setIsImageLoading] = useState<boolean>(false);
 
   const { recommendationList, tryOnImageUrl, isFetching } = useImageContext();
+  const { isTouchDevice } = useIsTouchDevice();
 
   const tabUnderline = (selectedTab: number) => {
     switch (selectedTab) {
@@ -129,7 +131,7 @@ export const TiktokHome: React.FC = () => {
 
   return (
     <div className="relative w-full h-full">
-      <div id="tabs" className="absolute top-14 left-1/2 -translate-x-1/2 z-40">
+      <div id="tabs" className={`absolute ${isTouchDevice ? 'top-8' : 'top-14'} left-1/2 -translate-x-1/2 z-40`}>
         <div className="flex items-center text-white font-semibold relative">
           <div className={`px-4 py-1 transition-all duration-150 ${selectedTab !== 0 ? "opacity-60" : ""} select-none`}>Explore</div>
           <div
@@ -147,7 +149,7 @@ export const TiktokHome: React.FC = () => {
           <div className={`absolute bottom-0 h-[3px] rounded-full transition-all duration-150 bg-white ${tabUnderline(selectedTab)}`}></div>
         </div>
       </div>
-      <div className="absolute top-14 right-5 z-50">
+      <div className={`absolute ${isTouchDevice ? 'top-8' : 'top-14'} right-5 z-50`}>
         {selectedTab === 1 && <ShoppingCartIcon className="w-6 h-6 text-white" />}
         {selectedTab === 2 && <MagnifyingGlassIcon className="w-6 h-6 text-white" />}
       </div>
@@ -158,7 +160,7 @@ export const TiktokHome: React.FC = () => {
             <>
               {vids.map((vid: any, i: number) => (
                 <div key={i} className="relative w-full h-full bg-neutral-950 overflow-hidden snap-normal snap-start">
-                  <video autoPlay loop muted className="absolute h-full bottom-0 h-full object-cover">
+                  <video autoPlay loop muted className="absolute w-full bottom-0 h-full object-cover">
                     <source src={vid.path} type="video/mp4" />
                     Your browser does not support this video tag.
                   </video>
