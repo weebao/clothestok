@@ -96,7 +96,7 @@ export const TiktokHome: React.FC = () => {
         title: "living my best life",
       },
       {
-        path: "tiktokvid1.mp4",
+        path: "tiktokvid1.MP4",
         avatar:
           "https://p16-sign-useast2a.tiktokcdn.com/tos-useast2a-avt-0068-euttp/05e04faaba5ed2b76bc188da19959bba~c5_100x100.jpeg?lk3s=a5d48078&nonce=70270&refresh_token=78915347977d646743205cf7d28bc1f5&x-expires=1720508400&x-signature=SM%2B3yZk2Kb4ICy6uEx%2Fx3zF%2BCFY%3D&shp=a5d48078&shcp=81f88b70",
         likes: "2647",

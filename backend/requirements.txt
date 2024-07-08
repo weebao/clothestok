@@ -1,5 +1,6 @@
 fastapi[all]
 httptools==0.6.1
+opencv-python==4.7.0.72
 pip-chill==1.0.3
 pydantic==2.8.2
 pydantic_core==2.20.1
