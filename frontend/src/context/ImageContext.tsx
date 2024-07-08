@@ -39,6 +39,9 @@ export const ImageProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
+    if (imageUrl === "") {
+      return;
+    }
     const blob = dataURLtoBlob(imageUrl);
     setDisplayedImageUrl(URL.createObjectURL(blob));
     const newImageFormData = new FormData();
