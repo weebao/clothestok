@@ -1,3 +1,4 @@
 fastapi[all]
 pip-chill==1.0.3
 python-dotenv==1.0.1
+uvicorn==0.30.1
