@@ -251,7 +251,7 @@ export const TiktokHome: React.FC = () => {
                       <div className="flex items-center justify-center">
                         <DotLoader loading={isImageLoading} color="#FE2858" />
                         <div className="rounded-md overflow-hidden aspect-square">
-                          <img src={tryOnImageUrl} alt="Try on" className="object-contain" />
+                          <img src={tryOnImageUrl} alt="Try on" className="object-fill w-full h-full" />
                         </div>
                       </div>
                     </div>

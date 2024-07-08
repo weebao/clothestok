@@ -10,7 +10,7 @@ const Home: NextPage = () => {
         <Image src="/clothestok.svg" alt="ClothesTok Logo" width={128} height={128} />
         <div>
           <h1 className="font-header text-6xl font-bold mb-2">ClothesTok</h1>
-          <p className="text-xl">Personalize how you shop on TikTok with AR</p>
+          <p className="text-xl">Personalize how you shop on TikTok with AI</p>
         </div>
       </div>
       <Link href="/try">
