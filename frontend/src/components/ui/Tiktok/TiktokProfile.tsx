@@ -19,8 +19,6 @@ export const TiktokProfile: React.FC = () => {
     }
   };
 
-  console.log(displayImageUrl)
-
   const takePic = useCallback(() => {
     const url = webcamRef.current.getScreenshot();
     setImageUrl(url);
