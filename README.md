@@ -4,6 +4,8 @@
 
 An AI clothes recommender trained on TikTok best fashion influencers
 
+[Devpost Link](https://devpost.com/software/clothestok)
+
 ## What is this about?
 
 The current TikTok's recommendation algorithm is using inputs on how users interact with videos to recommend products from TikTok shop, which is already very effective. ClothesTok hopes to elevate this even more and enhance users' tailored discovery of clothing shops by taking the user's visual features into consideration when recommending clothes products.
