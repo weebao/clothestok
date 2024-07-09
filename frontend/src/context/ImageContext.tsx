@@ -53,7 +53,6 @@ export const ImageProvider = ({ children }: { children: React.ReactNode }) => {
   const fetchRecommendation = async () => {
     try {
       setIsFetching(true);
-      console.log(API_URL)
       const response = await fetch(`${API_URL}/recommend`, {
         method: "POST",
         body: imageFormData,
