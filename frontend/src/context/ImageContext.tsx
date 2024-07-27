@@ -11,6 +11,8 @@ interface ImageContextType {
   resetAll: () => void;
 }
 
+const API_URL = process.env.API_URL;
+
 const ImageContext = createContext<ImageContextType | undefined>(undefined);
 
 export const ImageProvider = ({ children }: { children: React.ReactNode }) => {
@@ -37,6 +39,9 @@ export const ImageProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
+    if (imageUrl === "") {
+      return;
+    }
     const blob = dataURLtoBlob(imageUrl);
     setDisplayedImageUrl(URL.createObjectURL(blob));
     const newImageFormData = new FormData();
@@ -48,7 +53,7 @@ export const ImageProvider = ({ children }: { children: React.ReactNode }) => {
   const fetchRecommendation = async () => {
     try {
       setIsFetching(true);
-      const response = await fetch("http://127.0.0.1:8000/recommend", {
+      const response = await fetch(`${API_URL}/recommend`, {
         method: "POST",
         body: imageFormData,
       });
