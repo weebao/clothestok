@@ -3,8 +3,7 @@ from fastapi import FastAPI, HTTPException, Request, File, UploadFile, Form
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Annotated
-# from try_on import clothes_tryon
-from new_model import clothes_tryon
+from try_on import clothes_tryon
 from recommend import get_rec
 import requests
 import io 
