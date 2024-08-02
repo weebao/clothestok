@@ -55,8 +55,8 @@ npm run dev
 
 ## Implementation
 ### Tech stacks:
-- Backend: FastAPI, SegFormer, Torch, Scikit-learn
-- Frontend: Next.js, TailwindCSS
+- Backend: FastAPI, SegFormer, Torch, Scikit-learn, Deployed on Render - 512 MB RAM so it might not run if too many people are using
+- Frontend: Next.js, TailwindCSS, Deployed on Vercel
 - APIs used: TikTok's API, HuggingFace's API
 ### Backend Architecture
 ![architecture](/lib/architecture-img.png)
