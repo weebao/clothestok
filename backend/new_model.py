@@ -1,8 +1,13 @@
 import requests
 import json 
+import secrets
+import string
+
+def generate_random_hash(length=11):
+    return ''.join(secrets.choice(string.ascii_lowercase + string.digits) for _ in range(length))
 
 url = "https://levihsu-ootdiffusion.hf.space/queue/join?"
-session_hash = "8dd1sr4b7ua"
+session_hash = generate_random_hash()
 
 def upload_file(humanFile, clothesFile):
     uploadUrl = "https://yisol-idm-vton.hf.space/upload?upload_id=y6ij0e5ervi"  # "https://yisol-idm-vton.hf.space/upload" # "https://yisol-idm-vton.hf.space/upload?upload_id=boqov3k56gv"
@@ -32,8 +37,8 @@ def clothes_tryon(humanFile, clothesFile):
                     },
                     "path": humanPath,
                     "url": "https://yisol-idm-vton.hf.space/file=" + humanPath, # background is human image 
-                    # "orig_name": "background.png",
-                    # "size": 2748159,
+                    "orig_name": "background.png",
+                    "size": humanFile.__sizeof__(),
                     "mime_type": ""
                 },
                 "layers": [
@@ -41,10 +46,10 @@ def clothes_tryon(humanFile, clothesFile):
                         "meta": {
                             "_type": "gradio.FileData"
                         },
-                        "path": "/tmp/gradio/3958da4d7bca287c0bc4c7bbec26819c22adaab5/layer_0.png",
-                        "url": "https://yisol-idm-vton.hf.space/file=/tmp/gradio/3958da4d7bca287c0bc4c7bbec26819c22adaab5/layer_0.png", # layers is pure white image
+                        "path": "/tmp/gradio/5aa7bf5a1d0655f6865d73b68191adba0f2e5e38/layer_0.png",
+                        "url": "https://yisol-idm-vton.hf.space/file=/tmp/gradio/5aa7bf5a1d0655f6865d73b68191adba0f2e5e38/layer_0.png", # layers is pure white image
+                        "size": 2998,
                         "orig_name": "layer_0.png",
-                        # "size": 24043,
                         "mime_type": ""
                     }
                 ],
@@ -54,8 +59,8 @@ def clothes_tryon(humanFile, clothesFile):
                     },
                     "path": humanPath,
                     "url": "https://yisol-idm-vton.hf.space/file=" + humanPath, # composite is human image 
-                    # "orig_name": "composite.png",
-                    # "size": 2748159,
+                    "orig_name": "composite.png",
+                    "size": humanFile.__sizeof__(),
                     "mime_type": ""
                 }
             },
@@ -82,13 +87,15 @@ def clothes_tryon(humanFile, clothesFile):
     }
 
     response = requests.post(url, json=payload)
+    print(payload)
 
     if response.status_code == 200:
         print('Clothes try-on request succeeded')
 
         nextUrl = "https://yisol-idm-vton.hf.space/queue/data?session_hash=" + session_hash
+        print(nextUrl)
         
-        nextResponse = requests.get(nextUrl,stream=True)
+        nextResponse = requests.get(nextUrl, stream=True)
         
         for line in nextResponse.iter_lines():
             if line:
