@@ -1,7 +1,8 @@
 import requests
 import json 
 
-url = "https://levihsu-ootdiffusion.hf.space/queue/join?"
+diffusion_url = "https://levihsu-ootdiffusion.hf.space/queue/join?"
+image_upload_url = "https://levihsu-ootdiffusion.hf.space/file="
 session_hash = "u988s9pxmk"
 
 def upload_file(humanFile, clothesFile):
@@ -21,12 +22,12 @@ def upload_file(humanFile, clothesFile):
 def clothes_tryon(humanFile, clothesFile):
 
     humanPath, clothesPath = upload_file(humanFile, clothesFile)
-    print(humanPath, clothesPath)
+    print(image_upload_url + humanPath, image_upload_url + clothesPath)
     payload = {
         "data": [
             {
                 "path": humanPath, # "/tmp/gradio/0dc2e5ca0e97bcd0c46950316bda838a46167da4/meou.png", 
-                "url": "https://levihsu-ootdiffusion.hf.space/file=" + humanPath, # "https://levihsu-ootdiffusion.hf.space/file=/tmp/gradio/0dc2e5ca0e97bcd0c46950316bda838a46167da4/meou.png",
+                "url": image_upload_url + humanPath, # "https://levihsu-ootdiffusion.hf.space/file=/tmp/gradio/0dc2e5ca0e97bcd0c46950316bda838a46167da4/meou.png",
                 "size": None,
                 "mime_type": "image/png",
                 "meta": {
@@ -35,7 +36,7 @@ def clothes_tryon(humanFile, clothesFile):
             },
             {
                 "path": clothesPath, # "/tmp/gradio/17c62353c027a67af6f4c6e8dccce54fba3e1e43/048554_1.jpg"
-                "url":  "https://levihsu-ootdiffusion.hf.space/file=" + clothesPath, #"https://levihsu-ootdiffusion.hf.space/file=/tmp/gradio/17c62353c027a67af6f4c6e8dccce54fba3e1e43/048554_1.jpg",
+                "url":  image_upload_url + clothesPath, #"https://levihsu-ootdiffusion.hf.space/file=/tmp/gradio/17c62353c027a67af6f4c6e8dccce54fba3e1e43/048554_1.jpg",
                 "size": None,
                 "mime_type": None,
                 "is_stream": False,
@@ -55,7 +56,7 @@ def clothes_tryon(humanFile, clothesFile):
         "session_hash": session_hash
     }
 
-    response = requests.post(url, json=payload)
+    response = requests.post(diffusion_url, json=payload)
 
     if response.status_code == 200:
         print('Clothes try-on request succeeded')
