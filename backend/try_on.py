@@ -1,9 +1,14 @@
 import requests
 import json 
+import secrets
+import string
+
+def generate_random_hash(length=11):
+    return ''.join(secrets.choice(string.ascii_lowercase + string.digits) for _ in range(length))
 
 diffusion_url = "https://levihsu-ootdiffusion.hf.space/queue/join?"
 image_upload_url = "https://levihsu-ootdiffusion.hf.space/file="
-session_hash = "u988s9pxmk"
+session_hash = generate_random_hash()
 
 def upload_file(humanFile, clothesFile):
     uploadUrl = "https://levihsu-ootdiffusion.hf.space/upload?upload_id=svl5w8o9jba"

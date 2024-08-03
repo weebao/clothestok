@@ -6,8 +6,8 @@ export const IconTiktokShare: React.FC<IconType> = ({ className }) => {
     <svg className={className} width="31" height="30" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g filter="url(#filter0_d_528_314)">
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M16.6193 2.2949C15.9893 1.66493 14.9122 2.1111 14.9122 3.002V8.58779C9.09571 9.49329 2.82742 12.0869 2.00334 23.0559C1.93541 23.9601 2.9196 24.3127 3.5701 23.6811C5.21358 22.0852 8.25036 20.2449 14.9122 20.2449V26.1736C14.9122 27.0645 15.9893 27.5107 16.6193 26.8807L27.498 16.002C28.279 15.221 28.279 13.9546 27.498 13.1736L16.6193 2.2949Z"
           fill="white"
         />

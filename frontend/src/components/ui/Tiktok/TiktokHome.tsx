@@ -206,7 +206,7 @@ export const TiktokHome: React.FC = () => {
                   <h3 className="text-white font-semibold text-2xl mb-4 text-center">Great deals that fits your style!</h3>
                   <div className="bg-white rounded-lg mx-auto w-[90%] px-4 py-6 flex flex-col items-center">
                     <div className="bg-neutral-300 rounded-md w-1/2 aspect-square overflow-hidden mb-2 flex items-center justify-center">
-                      {!isFetching && recommendationList ? <img src={"https://levihsu-ootdiffusion.hf.space/file=/tmp/gradio/b99054bf1dc686195e7731342dd6d8cc651587bf/files-clothjes.jpeg"} className="w-full h-full" /> : <DotLoader color="#FE2858" />}
+                      {!isFetching && recommendationList ? <img src={recommendationList[0]} className="w-full h-full" /> : <DotLoader color="#FE2858" />}
                     </div>
                     <div className="text-lg mb-4">
                       <span className="text-neutral-400 line-through mr-2">$59.99</span>
@@ -252,7 +252,7 @@ export const TiktokHome: React.FC = () => {
                       <div className="flex items-center justify-center">
                         <DotLoader loading={isImageLoading} color="#FE2858" />
                         <div className="rounded-md overflow-hidden aspect-square">
-                          <img src={"https://levihsu-ootdiffusion.hf.space/file=/tmp/gradio/4cfa3fb94f7b2df2af1cf5c832191a10962e72f9/image.webp"} alt="Try on" className="object-fill w-full h-full" />
+                          <img src={tryOnImageUrl} alt="Try on" className="object-fill w-full h-full" />
                         </div>
                       </div>
                     </div>

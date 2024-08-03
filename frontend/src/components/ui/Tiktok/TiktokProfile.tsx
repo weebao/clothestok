@@ -125,7 +125,7 @@ export const TiktokProfile: React.FC = () => {
       ) : null}
       {openCamera ? (
         <div className="absolute w-full h-full top-0 bg-neutral-950 flex flex-col">
-          <Webcam ref={webcamRef} className="w-full h-full" />
+          <Webcam ref={webcamRef} className="w-full h-full" minScreenshotWidth={1920} minScreenshotHeight={1080} imageSmoothing={false}screenshotQuality={1} />
           <div className="bg-neutral-900 text-white flex items-center justify-between px-4 py-6">
             <div className="flex-1 hover:cursor-pointer" onClick={() => setOpenCampera(false)}>Cancel</div>
             <div className="flex-1 flex items-center justify-center relative hover:cursor-pointer" onClick={takePic}>
