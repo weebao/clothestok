@@ -1,3 +1,17 @@
-# https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Disallow: /api/
+Disallow: /private/
+Disallow: /admin/
+Disallow: /backend/
+
+# Allow specific crawlers access to certain areas
+User-agent: Googlebot
+Disallow: /admin/
+Allow: /
+
+User-agent: Bingbot
+Disallow: /private/
+Allow: /
+
+# Sitemap
+Sitemap: https://www.clothestok.vercel.app/sitemap.xml

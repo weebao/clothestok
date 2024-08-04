@@ -10,6 +10,7 @@ const App = ({ Component, pageProps }: AppProps) => {
     <>
       <Head>
         <title>ClothesTok</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <ImageProvider>
         <Component {...pageProps} />

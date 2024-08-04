@@ -62,7 +62,7 @@ export const TiktokHome: React.FC = () => {
     } else {
       setIsTryonBtnLoading(true);
     }
-  }
+  };
 
   const closeTryonDialog = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
@@ -109,7 +109,7 @@ export const TiktokHome: React.FC = () => {
         creator: "imbrian_store",
         title: "old italian style",
       },
-    ])
+    ]);
   }, []);
 
   useEffect(() => {
@@ -128,7 +128,7 @@ export const TiktokHome: React.FC = () => {
 
   return (
     <div className="relative w-full h-full">
-      <div id="tabs" className={`absolute ${isTouchDevice ? 'top-8' : 'top-14'} left-1/2 -translate-x-1/2 z-40`}>
+      <div id="tabs" className={`absolute ${isTouchDevice ? "top-8" : "top-14"} left-1/2 -translate-x-1/2 z-40`}>
         <div className="flex items-center text-white font-semibold relative">
           <div className={`px-4 py-1 transition-all duration-150 ${selectedTab !== 0 ? "opacity-60" : ""} select-none`}>Explore</div>
           <div
@@ -146,7 +146,7 @@ export const TiktokHome: React.FC = () => {
           <div className={`absolute bottom-0 h-[3px] rounded-full transition-all duration-150 bg-white ${tabUnderline(selectedTab)}`}></div>
         </div>
       </div>
-      <div className={`absolute ${isTouchDevice ? 'top-8' : 'top-14'} right-5 z-50`}>
+      <div className={`absolute ${isTouchDevice ? "top-8" : "top-14"} right-5 z-50`}>
         {selectedTab === 1 && <ShoppingCartIcon className="w-6 h-6 text-white" />}
         {selectedTab === 2 && <MagnifyingGlassIcon className="w-6 h-6 text-white" />}
       </div>
@@ -198,12 +198,21 @@ export const TiktokHome: React.FC = () => {
                   </div>
                 </div>
               ))}
-              <div className="relative w-full h-full bg-gradient-to-b from-yellow-500 to-accent flex items-center justify-center overflow-hidden snap-normal snap-start">
-                <motion.div initial={{ scale: 0.1 }} whileInView={{ scale: 1, transition: { type: "spring", damping: 5, stiffness: 100 } }}>
+              <div className="relative w-full h-full bg-gradient-to-b from-yellow-500 to-accent flex items-center justify-center snap-normal snap-start">
+                <motion.div
+                  initial={{ scale: 0.1 }}
+                  whileInView={{ scale: 1, transition: { type: "spring", damping: 5, stiffness: 100 } }}
+                  viewport={{ amount: 0.5 }}
+                  className="relative"
+                >
                   <h3 className="text-white font-semibold text-2xl mb-4 text-center">Great deals that fits your style!</h3>
                   <div className="bg-white rounded-lg mx-auto w-[90%] px-4 py-6 flex flex-col items-center">
                     <div className="bg-neutral-300 rounded-md w-1/2 aspect-square overflow-hidden mb-2 flex items-center justify-center">
-                      {!isFetching && recommendationList ? <img src={recommendationList[0]} className="w-full h-full" /> : <DotLoader color="#FE2858" />}
+                      {!isFetching && recommendationList ? (
+                        <img src={recommendationList[0]} className="w-full h-full" />
+                      ) : (
+                        <DotLoader color="#FE2858" />
+                      )}
                     </div>
                     <div className="text-lg mb-4">
                       <span className="text-neutral-400 line-through mr-2">$59.99</span>

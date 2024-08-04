@@ -13,7 +13,7 @@ export const IconTiktokComment: React.FC<IconType> = ({ className }) => {
         />
       </g>
       <defs>
-        <filter id="filter0_d_528_306" x="0" y="0" width="32" height="32" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <filter id="filter0_d_528_306" x="0" y="0" width="32" height="32" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
           <feFlood flood-opacity="0" result="BackgroundImageFix" />
           <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
           <feOffset dx="1" dy="1" />
