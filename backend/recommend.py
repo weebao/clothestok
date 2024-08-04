@@ -2,6 +2,8 @@ import logging
 import torch
 import torchvision.transforms as transforms
 from torchvision import models
+
+
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 import glob
