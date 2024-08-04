@@ -1,6 +1,6 @@
 {
-  "short_name": "Engeenee Demo",
-  "name": "Engeenee Demo",
+  "short_name": "ClothesTok",
+  "name": "ClothesTok",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,12 +8,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "favicon-small.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "favicon-small.png",
       "type": "image/png",
       "sizes": "512x512"
     }
@@ -21,5 +21,5 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#040404"
 }

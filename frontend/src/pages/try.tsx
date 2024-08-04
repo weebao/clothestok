@@ -10,7 +10,7 @@ const TryPage: NextPage = () => {
   const { resetAll } = useImageContext();
   const { isTouchDevice } = useIsTouchDevice();
   return (
-    <div className="relative w-screen h-screen flex flex-col items-center justify-center bg-gradient-to-tr from-primary from-20% via-secondary to-accent to-80%">
+    <div className="relative w-screen h-dvh flex flex-col items-center justify-center bg-gradient-to-tr from-primary from-20% via-secondary to-accent to-80%">
       {
         isTouchDevice ? (
           <Tiktok />

@@ -62,7 +62,7 @@ export const TiktokHome: React.FC = () => {
     } else {
       setIsTryonBtnLoading(true);
     }
-  }
+  };
 
   const closeTryonDialog = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
@@ -85,11 +85,12 @@ export const TiktokHome: React.FC = () => {
   }, [dragging]);
 
   useEffect(() => {
+    scrollContainerRef.current?.scrollTo(0, 0);
     setVids([
       {
         path: "tiktokvid0.mp4",
         avatar:
-          "https://p19-pu-sign-useast8.tiktokcdn-us.com/tos-useast5-avt-0068-tx/50a509743e4cda0f04f761f00c76ed1a~c5_100x100.jpeg?lk3s=a5d48078&nonce=23812&refresh_token=7950fc15b73fca16f959e235f51d5b5c&x-expires=1720508400&x-signature=ufvwoU4KKV5nmDs78m1PoNECOpw%3D&shp=a5d48078&shcp=81f88b70",
+          "https://p16-pu-sign-useast8.tiktokcdn-us.com/tos-useast5-avt-0068-tx/50a509743e4cda0f04f761f00c76ed1a~c5_720x720.jpeg?lk3s=a5d48078&nonce=76188&refresh_token=b7ecd636169d2134ba192dc1260d3a9f&x-expires=1722837600&x-signature=b0Y%2F7ap7Sn6FsZSsUDW%2BlxA99WM%3D&shp=a5d48078&shcp=81f88b70",
         likes: "500.3K",
         comments: "1983",
         bookmarks: "20.7K",
@@ -100,7 +101,7 @@ export const TiktokHome: React.FC = () => {
       {
         path: "tiktokvid1.MP4",
         avatar:
-          "https://p16-sign-useast2a.tiktokcdn.com/tos-useast2a-avt-0068-euttp/05e04faaba5ed2b76bc188da19959bba~c5_100x100.jpeg?lk3s=a5d48078&nonce=70270&refresh_token=78915347977d646743205cf7d28bc1f5&x-expires=1720508400&x-signature=SM%2B3yZk2Kb4ICy6uEx%2Fx3zF%2BCFY%3D&shp=a5d48078&shcp=81f88b70",
+          "https://p16-sign-useast2a.tiktokcdn.com/tos-useast2a-avt-0068-euttp/05e04faaba5ed2b76bc188da19959bba~c5_720x720.jpeg?lk3s=a5d48078&nonce=87782&refresh_token=18175363c2b4f40679dd7823b81ffae8&x-expires=1722837600&x-signature=utLFiR%2F0gdsFL%2Br2DbjXhDyncuA%3D&shp=a5d48078&shcp=81f88b70",
         likes: "2647",
         comments: "11",
         bookmarks: "578",
@@ -109,10 +110,6 @@ export const TiktokHome: React.FC = () => {
         title: "old italian style",
       },
     ]);
-  }, []);
-
-  useEffect(() => {
-    scrollContainerRef.current?.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
@@ -131,7 +128,7 @@ export const TiktokHome: React.FC = () => {
 
   return (
     <div className="relative w-full h-full">
-      <div id="tabs" className={`absolute ${isTouchDevice ? 'top-8' : 'top-14'} left-1/2 -translate-x-1/2 z-40`}>
+      <div id="tabs" className={`absolute ${isTouchDevice ? "top-8" : "top-14"} left-1/2 -translate-x-1/2 z-40`}>
         <div className="flex items-center text-white font-semibold relative">
           <div className={`px-4 py-1 transition-all duration-150 ${selectedTab !== 0 ? "opacity-60" : ""} select-none`}>Explore</div>
           <div
@@ -149,7 +146,7 @@ export const TiktokHome: React.FC = () => {
           <div className={`absolute bottom-0 h-[3px] rounded-full transition-all duration-150 bg-white ${tabUnderline(selectedTab)}`}></div>
         </div>
       </div>
-      <div className={`absolute ${isTouchDevice ? 'top-8' : 'top-14'} right-5 z-50`}>
+      <div className={`absolute ${isTouchDevice ? "top-8" : "top-14"} right-5 z-50`}>
         {selectedTab === 1 && <ShoppingCartIcon className="w-6 h-6 text-white" />}
         {selectedTab === 2 && <MagnifyingGlassIcon className="w-6 h-6 text-white" />}
       </div>
@@ -160,7 +157,7 @@ export const TiktokHome: React.FC = () => {
             <>
               {vids.map((vid: any, i: number) => (
                 <div key={i} className="relative w-full h-full bg-neutral-950 overflow-hidden snap-normal snap-start">
-                  <video autoPlay loop muted className="absolute w-full bottom-0 h-full object-cover">
+                  <video autoPlay loop muted playsInline className="absolute w-full bottom-0 h-full object-cover">
                     <source src={vid.path} type="video/mp4" />
                     Your browser does not support this video tag.
                   </video>
@@ -201,12 +198,21 @@ export const TiktokHome: React.FC = () => {
                   </div>
                 </div>
               ))}
-              <div className="relative w-full h-full bg-gradient-to-b from-yellow-500 to-accent flex items-center justify-center overflow-hidden snap-normal snap-start">
-                <motion.div initial={{ scale: 0.1 }} whileInView={{ scale: 1, transition: { type: "spring", damping: 5, stiffness: 100 } }}>
+              <div className="relative w-full h-full bg-gradient-to-b from-yellow-500 to-accent flex items-center justify-center snap-normal snap-start">
+                <motion.div
+                  initial={{ scale: 0.1 }}
+                  whileInView={{ scale: 1, transition: { type: "spring", damping: 5, stiffness: 100 } }}
+                  viewport={{ amount: 0.5 }}
+                  className="relative"
+                >
                   <h3 className="text-white font-semibold text-2xl mb-4 text-center">Great deals that fits your style!</h3>
                   <div className="bg-white rounded-lg mx-auto w-[90%] px-4 py-6 flex flex-col items-center">
                     <div className="bg-neutral-300 rounded-md w-1/2 aspect-square overflow-hidden mb-2 flex items-center justify-center">
-                      {!isFetching && recommendationList ? <img src={"https://levihsu-ootdiffusion.hf.space/file=/tmp/gradio/b99054bf1dc686195e7731342dd6d8cc651587bf/files-clothjes.jpeg"} className="w-full h-full" /> : <DotLoader color="#FE2858" />}
+                      {!isFetching && recommendationList ? (
+                        <img src={recommendationList[0]} className="w-full h-full" />
+                      ) : (
+                        <DotLoader color="#FE2858" />
+                      )}
                     </div>
                     <div className="text-lg mb-4">
                       <span className="text-neutral-400 line-through mr-2">$59.99</span>
@@ -252,7 +258,7 @@ export const TiktokHome: React.FC = () => {
                       <div className="flex items-center justify-center">
                         <DotLoader loading={isImageLoading} color="#FE2858" />
                         <div className="rounded-md overflow-hidden aspect-square">
-                          <img src={"https://levihsu-ootdiffusion.hf.space/file=/tmp/gradio/4cfa3fb94f7b2df2af1cf5c832191a10962e72f9/image.webp"} alt="Try on" className="object-fill w-full h-full" />
+                          <img src={tryOnImageUrl} alt="Try on" className="object-fill w-full h-full" />
                         </div>
                       </div>
                     </div>

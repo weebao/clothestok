@@ -1,16 +1,23 @@
 import requests
 import json 
+import secrets
+import string
+
+def generate_random_hash(length=11):
+    return ''.join(secrets.choice(string.ascii_lowercase + string.digits) for _ in range(length))
 
 diffusion_url = "https://levihsu-ootdiffusion.hf.space/queue/join?"
 image_upload_url = "https://levihsu-ootdiffusion.hf.space/file="
-session_hash = "u988s9pxmk"
+session_hash = generate_random_hash()
+upload_id = generate_random_hash()
 
 def upload_file(humanFile, clothesFile):
-    uploadUrl = "https://levihsu-ootdiffusion.hf.space/upload?upload_id=svl5w8o9jba"
+    uploadUrl = "https://levihsu-ootdiffusion.hf.space/upload?upload_id=" + upload_id
     humanPath = clothesPath = None 
     
     files = {'files': humanFile} 
     response = requests.post(uploadUrl, files=files)
+    print("Response:", response.json())
     humanPath = response.json()[0]
 
     files = {'files': clothesFile} 
@@ -23,6 +30,8 @@ def clothes_tryon(humanFile, clothesFile):
 
     humanPath, clothesPath = upload_file(humanFile, clothesFile)
     print(image_upload_url + humanPath, image_upload_url + clothesPath)
+
+    # return ""
     payload = {
         "data": [
             {
@@ -51,8 +60,8 @@ def clothes_tryon(humanFile, clothesFile):
             -1
         ],
         "event_data": None,
-        "fn_index": 8,
-        "trigger_id": 42,
+        "fn_index": 2,
+        "trigger_id": 17,
         "session_hash": session_hash
     }
 

@@ -1,0 +1,24 @@
+{
+  "name": "ClothesTok",
+  "short_name": "ClothesTok",
+  "description": "Discover fashion trends with AI-powered recommendations tailored to your style.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ff4081",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon-small.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-small.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["shopping", "lifestyle", "fashion"],
+  "lang": "en-US"
+}

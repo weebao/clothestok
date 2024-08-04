@@ -5,8 +5,8 @@ export const IconTiktokAddAccount: React.FC<IconType> = ({ className }) => {
   return (
     <svg className={className} width="23" height="22" viewBox="0 0 23 22" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M14.8659 5.28217C14.8659 8.19943 12.4635 10.5643 9.49986 10.5643C6.53626 10.5643 4.13379 8.19943 4.13379 5.28217C4.13379 2.36491 6.53626 0 9.49986 0C12.4635 0 14.8659 2.36491 14.8659 5.28217ZM12.9995 5.28217C12.9995 7.18473 11.4326 8.72706 9.49986 8.72706C7.56708 8.72706 6.00025 7.18473 6.00025 5.28217C6.00025 3.37961 7.56708 1.83728 9.49986 1.83728C11.4326 1.83728 12.9995 3.37961 12.9995 5.28217Z"
         fill="currentColor"
       />

@@ -50,9 +50,11 @@ async def recommend(humanFile: Annotated[bytes, File()]):
     clothes_buffer = io.BytesIO()
     clothes_image.save(clothes_buffer, format='JPEG')
     # print(response.content)
-    tryOnUrl = clothes_tryon(io.BytesIO(body_buffer.getvalue()), io.BytesIO(clothes_buffer.getvalue()))
-    
-    return {"bestFitLinks": links, "tryOnUrl": tryOnUrl} 
+    try:
+        tryOnUrl = clothes_tryon(humanFile, io.BytesIO(clothes_buffer.getvalue()))
+        return {"bestFitLinks": links, "tryOnUrl": tryOnUrl} 
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 
