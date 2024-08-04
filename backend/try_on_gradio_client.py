@@ -3,10 +3,6 @@ import json
 import secrets
 import string
 from gradio_client import Client, handle_file
-from dotenv import load_dotenv
-from fastapi import FastAPI
-from typing import Annotated
-from fastapi import FastAPI, HTTPException, Request, File, UploadFile, Form
 
 
 def generate_random_hash(length=11):
@@ -49,21 +45,26 @@ def clothes_tryon(humanFile, clothesFile):
     print(result)
     return result[0]['image']
 
-
-load_dotenv()
-
-app = FastAPI()
-
-origins = [
-    "http://localhost:3000",
-    "*",
-]
-
-@app.post("/tryon")
-async def tryon_endpoint(humanFile: Annotated[bytes, File()], clothesFile: Annotated[bytes, File()]):
-    try:        
-        imageUrl = clothes_tryon(humanFile, clothesFile)
-        return {"tryOnImageUrl": imageUrl}
+if __name__ == "__main__":
+    from dotenv import load_dotenv
+    from fastapi import FastAPI
+    from typing import Annotated
+    from fastapi import FastAPI, HTTPException, Request, File, UploadFile, Form
     
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    load_dotenv()
+
+    app = FastAPI()
+
+    origins = [
+        "http://localhost:3000",
+        "*",
+    ]
+
+    @app.post("/tryon")
+    async def tryon_endpoint(humanFile: Annotated[bytes, File()], clothesFile: Annotated[bytes, File()]):
+        try:        
+            imageUrl = clothes_tryon(humanFile, clothesFile)
+            return {"tryOnImageUrl": imageUrl}
+        
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
