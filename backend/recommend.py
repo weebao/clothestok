@@ -94,10 +94,10 @@ def get_rec(image): # image_path = "1.jpg"
         logging.error("Error: Embedding file not found.")
 
     similarities = cosine_similarity([query_features], dataset_features)[0]
-    top_indices = np.argsort(similarities)[-5:][::-1]
-    top_5_similar_images = [image_paths[idx] for idx in top_indices]
+    top_indices = np.argsort(similarities)[-6:][::-1]
+    top_6_similar_images = [image_paths[idx] for idx in top_indices]
     links = []
-    for img_path in top_5_similar_images:
+    for img_path in top_6_similar_images:
         filename = img_path.split('/')[-1]
         link = find_link_from_filename(filename)
         links.append(process_link(link))

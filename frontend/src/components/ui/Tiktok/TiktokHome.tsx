@@ -85,11 +85,12 @@ export const TiktokHome: React.FC = () => {
   }, [dragging]);
 
   useEffect(() => {
+    scrollContainerRef.current?.scrollTo(0, 0);
     setVids([
       {
         path: "tiktokvid0.mp4",
         avatar:
-          "https://p19-pu-sign-useast8.tiktokcdn-us.com/tos-useast5-avt-0068-tx/50a509743e4cda0f04f761f00c76ed1a~c5_100x100.jpeg?lk3s=a5d48078&nonce=23812&refresh_token=7950fc15b73fca16f959e235f51d5b5c&x-expires=1720508400&x-signature=ufvwoU4KKV5nmDs78m1PoNECOpw%3D&shp=a5d48078&shcp=81f88b70",
+          "https://p16-pu-sign-useast8.tiktokcdn-us.com/tos-useast5-avt-0068-tx/50a509743e4cda0f04f761f00c76ed1a~c5_720x720.jpeg?lk3s=a5d48078&nonce=76188&refresh_token=b7ecd636169d2134ba192dc1260d3a9f&x-expires=1722837600&x-signature=b0Y%2F7ap7Sn6FsZSsUDW%2BlxA99WM%3D&shp=a5d48078&shcp=81f88b70",
         likes: "500.3K",
         comments: "1983",
         bookmarks: "20.7K",
@@ -100,7 +101,7 @@ export const TiktokHome: React.FC = () => {
       {
         path: "tiktokvid1.MP4",
         avatar:
-          "https://p16-sign-useast2a.tiktokcdn.com/tos-useast2a-avt-0068-euttp/05e04faaba5ed2b76bc188da19959bba~c5_100x100.jpeg?lk3s=a5d48078&nonce=70270&refresh_token=78915347977d646743205cf7d28bc1f5&x-expires=1720508400&x-signature=SM%2B3yZk2Kb4ICy6uEx%2Fx3zF%2BCFY%3D&shp=a5d48078&shcp=81f88b70",
+          "https://p16-sign-useast2a.tiktokcdn.com/tos-useast2a-avt-0068-euttp/05e04faaba5ed2b76bc188da19959bba~c5_720x720.jpeg?lk3s=a5d48078&nonce=87782&refresh_token=18175363c2b4f40679dd7823b81ffae8&x-expires=1722837600&x-signature=utLFiR%2F0gdsFL%2Br2DbjXhDyncuA%3D&shp=a5d48078&shcp=81f88b70",
         likes: "2647",
         comments: "11",
         bookmarks: "578",
@@ -108,11 +109,7 @@ export const TiktokHome: React.FC = () => {
         creator: "imbrian_store",
         title: "old italian style",
       },
-    ]);
-  }, []);
-
-  useEffect(() => {
-    scrollContainerRef.current?.scrollTo(0, 0);
+    ])
   }, []);
 
   useEffect(() => {
@@ -160,7 +157,7 @@ export const TiktokHome: React.FC = () => {
             <>
               {vids.map((vid: any, i: number) => (
                 <div key={i} className="relative w-full h-full bg-neutral-950 overflow-hidden snap-normal snap-start">
-                  <video autoPlay loop muted className="absolute w-full bottom-0 h-full object-cover">
+                  <video autoPlay loop muted playsInline className="absolute w-full bottom-0 h-full object-cover">
                     <source src={vid.path} type="video/mp4" />
                     Your browser does not support this video tag.
                   </video>

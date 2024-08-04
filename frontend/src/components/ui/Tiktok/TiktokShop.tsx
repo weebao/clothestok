@@ -4,6 +4,12 @@ import { BookmarkIcon, TicketIcon, MapPinIcon, ChevronRightIcon } from "@heroico
 import { DotLoader } from "react-spinners";
 import { useImageContext } from "@/context/ImageContext";
 
+const items = [
+  "https://plus.unsplash.com/premium_photo-1675186049409-f9f8f60ebb5e?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1609195994377-dbffba3a4eb4?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1592670587543-f409a95839e0?q=80&w=2557&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+];
+
 export const TiktokShop = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { recommendationList } = useImageContext();
@@ -52,7 +58,9 @@ export const TiktokShop = () => {
                 <DotLoader loading={isLoading} color="#FE2858" />
               </div>
             ))
-          ) : recommendationList.length === 0 ? <p className="col-span-2 text-center">No results yet. You might want to update your ClothesTok profile</p> : (
+          ) : recommendationList.length === 0 ? (
+            <p className="col-span-2 text-center">No results yet. You might want to update your ClothesTok profile</p>
+          ) : (
             recommendationList.map((item, index) => (
               <div key={index} className="bg-neutral-50 aspect-square rounded-lg overflow-hidden flex items-center justify-center">
                 <img src={item} />
@@ -67,9 +75,11 @@ export const TiktokShop = () => {
           <ChevronRightIcon className="w-6 h-6" />
         </div>
         <div className="grid grid-cols-3 gap-2">
-          <div className="bg-neutral-50 aspect-square rounded-lg"></div>
-          <div className="bg-neutral-50 aspect-square rounded-lg"></div>
-          <div className="bg-neutral-50 aspect-square rounded-lg"></div>
+          {items.map((item, index) => (
+            <div key={index} className="bg-neutral-50 aspect-square rounded-lg overflow-hidden flex items-center justify-center">
+              <img src={item} />
+            </div>
+          ))}
         </div>
       </div>
       <div className="grid grid-cols-3 gap-4">

@@ -10,6 +10,7 @@ import {
   IconTiktokProfileSolid,
   IconTiktokProfileOutlined,
 } from "@/components/assets/icons";
+import { useIsTouchDevice } from "@/hooks/useIsTouchDevice";
 
 type TiktokNavbarType = {
   selected: number;
@@ -17,8 +18,12 @@ type TiktokNavbarType = {
 };
 
 export const TiktokNavbar: React.FC<TiktokNavbarType> = ({ selected, setSelected }) => {
+  const { isTouchDevice } = useIsTouchDevice();
+
   return (
-    <div className={`sticky bottom-0 w-full px-8 pt-2 pb-8 ${selected === 0 ? 'bg-neutral-950 text-white' : 'bg-neutral-50 text-neutral-950'} flex items-center justify-between z-0`}>
+    <div
+      className={`sticky bottom-0 w-full px-8 pt-2 ${isTouchDevice ? "pb-2" : "pb-8"} ${selected === 0 ? "bg-neutral-950 text-white" : "bg-neutral-50 text-neutral-950"} flex items-center justify-between z-0`}
+    >
       <div className="flex flex-col items-center hover:cursor-pointer" onClick={() => setSelected(0)}>
         {selected === 0 ? <IconTiktokHomeSolid /> : <IconTiktokHomeOutlined className="text-stone-400" />}
         <p className={`text-xs ${selected === 0 ? "" : "text-stone-400"}`}>Home</p>

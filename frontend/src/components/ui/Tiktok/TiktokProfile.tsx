@@ -26,9 +26,22 @@ export const TiktokProfile: React.FC = () => {
     setOpenDialog(true);
   }, [webcamRef]);
 
+  const handleUploadImg = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImageUrl(reader.result as string);
+        setOpenCampera(false);
+        setOpenDialog(true);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div className="relative w-full h-full bg-neutral-100">
-      <div className={`px-6 ${isTouchDevice ? 'pt-8' : 'pt-14'} pb-2 flex items-center justify-between`}>
+      <div className={`px-6 ${isTouchDevice ? "pt-8" : "pt-14"} pb-2 flex items-center justify-between`}>
         <IconTiktokAddAccount />
         <div className="flex items-center gap-2">
           <div className="font-bold">Name</div>
@@ -105,7 +118,7 @@ export const TiktokProfile: React.FC = () => {
                     </button>
                   </div>
                 </>
-                ) : (
+              ) : (
                 <>
                   <p className="text-center mb-4">Show us how you look like and we will bring the best clothes to you!</p>
                   <button
@@ -125,14 +138,28 @@ export const TiktokProfile: React.FC = () => {
       ) : null}
       {openCamera ? (
         <div className="absolute w-full h-full top-0 bg-neutral-950 flex flex-col">
-          <Webcam ref={webcamRef} className="w-full h-full" minScreenshotWidth={1920} minScreenshotHeight={1080} imageSmoothing={false}screenshotQuality={1} />
-          <div className="bg-neutral-900 text-white flex items-center justify-between px-4 py-6">
-            <div className="flex-1 hover:cursor-pointer" onClick={() => setOpenCampera(false)}>Cancel</div>
-            <div className="flex-1 flex items-center justify-center relative hover:cursor-pointer" onClick={takePic}>
-              <div className="absolute rounded-full bg-neutral-900 border-2 border-white w-10 h-10"></div>
-              <div className="rounded-full bg-white w-8 h-8 z-10"></div>
+          <Webcam
+            ref={webcamRef}
+            className="w-full h-full"
+            minScreenshotWidth={1920}
+            minScreenshotHeight={1080}
+            imageSmoothing={false}
+            screenshotQuality={1}
+          />
+          <div className="sticky bottom-0 bg-neutral-900 text-white flex items-center justify-between px-4 py-4">
+            <div className="flex-1">
+              <input type="file" name="image" id="image" className="hidden" accept="image/*" onChange={handleUploadImg} />
+              <label htmlFor="image" className="hover:cursor-pointer">
+                Upload
+              </label>
             </div>
-            <div className="flex-1"></div>
+            <div className="flex-1 flex items-center justify-center relative hover:cursor-pointer" onClick={takePic}>
+              <div className="absolute rounded-full bg-neutral-900 border-2 border-white w-12 h-12"></div>
+              <div className="rounded-full bg-white active:bg-neutral-500 w-10 h-10 z-10"></div>
+            </div>
+            <div className="flex-1 text-right hover:cursor-pointer" onClick={() => setOpenCampera(false)}>
+              Cancel
+            </div>
           </div>
         </div>
       ) : null}
