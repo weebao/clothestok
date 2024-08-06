@@ -205,7 +205,7 @@ export const TiktokHome: React.FC = () => {
                   viewport={{ amount: 0.5 }}
                   className="relative"
                 >
-                  <h3 className="text-white font-semibold text-2xl mb-4 text-center">Great deals that fits your style!</h3>
+                  <h3 className="text-white font-semibold text-2xl mb-4 text-center">We found a great deal for you!</h3>
                   <div className="bg-white rounded-lg mx-auto w-[90%] px-4 py-6 flex flex-col items-center">
                     <div className="bg-neutral-300 rounded-md w-1/2 aspect-square overflow-hidden mb-2 flex items-center justify-center">
                       {!isFetching && recommendationList ? (

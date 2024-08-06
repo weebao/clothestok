@@ -13,37 +13,39 @@ image_upload_url = "https://levihsu-ootdiffusion.hf.space/file="
 session_hash = generate_random_hash()
 upload_id = generate_random_hash()
 
-def upload_file(humanFile, clothesFile):
-    uploadUrl = "https://levihsu-ootdiffusion.hf.space/upload?upload_id=" + upload_id
-    humanPath = clothesPath = None 
+def upload_file(file):
+    upload_url = "https://levihsu-ootdiffusion.hf.space/upload?upload_id=" + upload_id
+    path = None 
     
-    files = {'files': humanFile} 
-    response = requests.post(uploadUrl, files=files)
-    humanPath = response.json()[0]
-
-    files = {'files': clothesFile} 
-    response = requests.post(uploadUrl, files=files)
-    clothesPath = response.json()[0]
+    files = {'files': file} 
+    response = requests.post(upload_url, files=files)
+    path = response.json()[0]
     
-    return humanPath, clothesPath
+    return path
 
 
 def clothes_tryon(humanFile, clothesFile):
-    humanPath, clothesPath = upload_file(humanFile, clothesFile)
-    print('obtained humanLink and clothesLink: ', image_upload_url + humanPath, image_upload_url + clothesPath)
+    human_path, clothes_path = upload_file(humanFile), upload_file(clothesFile)
+    print('obtained humanLink and clothesLink: ', image_upload_url + human_path, image_upload_url + clothes_path)
     client = Client("levihsu/OOTDiffusion")
     print('running gradio client')
     result = client.predict(
-        vton_img=handle_file(image_upload_url + humanPath),
-        garm_img=handle_file(image_upload_url + clothesPath),
+        vton_img=handle_file(image_upload_url + human_path),
+        garm_img=handle_file(image_upload_url + clothes_path),
         n_samples=1,
         n_steps=20,
         image_scale=2,
         seed=-1,
         api_name="/process_hd"
     )
-    print(result)
-    return result[0]['image']
+    image_path = result[0]['image']
+    print(image_path)
+    image_url = image_upload_url
+    with open(image_path, 'rb') as f:
+        image = f.read()
+        image_url += upload_file(image)
+        print("RESULT:", image_url)
+    return image_url
 
 if __name__ == "__main__":
     from dotenv import load_dotenv
