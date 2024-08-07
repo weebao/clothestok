@@ -12,7 +12,7 @@ The current TikTok's recommendation algorithm is using inputs on how users inter
 
 ## Demo
 
-[![ClothesTok](https://img.youtube.com/vi/05bMAfdcDVk/0.jpg)]([https://youtu.be/JtVMitNVZec](https://youtu.be/05bMAfdcDVk?si=9E9W4BmkScOwPtN_))
+[![ClothesTok](https://img.youtube.com/vi/05bMAfdcDVk/0.jpg)](https://youtu.be/05bMAfdcDVk?si=9E9W4BmkScOwPtN_)
 
 ## Table of Contents
 

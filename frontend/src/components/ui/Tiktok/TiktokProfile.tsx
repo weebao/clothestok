@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback } from "react";
 import { IconTiktokAddAccount, IconTiktokHeartHide, IconTiktokTabs, IconTiktokMenu, IconClothesTok } from "@/components/assets/icons";
 import Webcam from "react-webcam";
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import { ChevronDownIcon, ArrowPathIcon } from "@heroicons/react/24/solid";
 import { BookmarkIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useImageContext } from "@/context/ImageContext";
 import { useIsTouchDevice } from "@/hooks/useIsTouchDevice";
@@ -9,6 +9,7 @@ import { useIsTouchDevice } from "@/hooks/useIsTouchDevice";
 export const TiktokProfile: React.FC = () => {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [openCamera, setOpenCampera] = useState<boolean>(false);
+  const [cameraFacingUser, setCameraFacingUser] = useState<boolean>(true);
   const webcamRef = useRef<any>(null);
   const { imageUrl, displayImageUrl, setImageUrl, fetchRecommendation } = useImageContext();
   const { isTouchDevice } = useIsTouchDevice();
@@ -145,6 +146,9 @@ export const TiktokProfile: React.FC = () => {
             minScreenshotHeight={1080}
             imageSmoothing={false}
             screenshotQuality={1}
+            videoConstraints={{
+              facingMode: cameraFacingUser ? "user" : "environment",
+            }}
           />
           <div className="sticky bottom-0 bg-neutral-900 text-white flex items-center justify-between px-4 py-4">
             <div className="flex-1">
@@ -153,12 +157,23 @@ export const TiktokProfile: React.FC = () => {
                 Upload
               </label>
             </div>
-            <div className="flex-1 flex items-center justify-center relative hover:cursor-pointer" onClick={takePic}>
-              <div className="absolute rounded-full bg-neutral-900 border-2 border-white w-12 h-12"></div>
-              <div className="rounded-full bg-white active:bg-neutral-500 w-10 h-10 z-10"></div>
+            <div className="flex gap-4 items-center">
+              <div className="w-8 h-8"></div>
+              <div className="flex-1 flex items-center justify-center relative hover:cursor-pointer" onClick={takePic}>
+                <div className="absolute rounded-full bg-neutral-900 border-2 border-white w-12 h-12"></div>
+                <div className="rounded-full bg-white active:bg-neutral-500 w-10 h-10 z-10"></div>
+              </div>
+              <div
+                className="w-8 h-8 p-1 rounded-md flex items-center justify-center text-white focus:bg-neutral-800 cursor-pointer"
+                onClick={() => setCameraFacingUser(!cameraFacingUser)}
+              >
+                <ArrowPathIcon className="w-6 h-6" />
+              </div>
             </div>
-            <div className="flex-1 text-right hover:cursor-pointer" onClick={() => setOpenCampera(false)}>
-              Cancel
+            <div className="flex-1 text-right">
+              <span className="cursor-pointer" onClick={() => setOpenCampera(false)}>
+                Cancel
+              </span>
             </div>
           </div>
         </div>

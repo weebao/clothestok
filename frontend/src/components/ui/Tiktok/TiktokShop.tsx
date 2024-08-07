@@ -48,7 +48,7 @@ export const TiktokShop = () => {
       </div>
       <div className="rounded-lg bg-accent text-white px-4 pt-2 pb-4 mb-4">
         <div className="w-full flex items-center justify-between mb-4">
-          <h3 className="font-semibold text-lg">Deals best fits for you</h3>
+          <h3 className="font-semibold text-lg">Deals best fit for you</h3>
           <ChevronRightIcon className="w-6 h-6" />
         </div>
         <div className="grid grid-cols-2 gap-2">

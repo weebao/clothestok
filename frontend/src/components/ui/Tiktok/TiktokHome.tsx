@@ -90,7 +90,7 @@ export const TiktokHome: React.FC = () => {
       {
         path: "tiktokvid0.mp4",
         avatar:
-          "https://p16-pu-sign-useast8.tiktokcdn-us.com/tos-useast5-avt-0068-tx/50a509743e4cda0f04f761f00c76ed1a~c5_720x720.jpeg?lk3s=a5d48078&nonce=76188&refresh_token=b7ecd636169d2134ba192dc1260d3a9f&x-expires=1722837600&x-signature=b0Y%2F7ap7Sn6FsZSsUDW%2BlxA99WM%3D&shp=a5d48078&shcp=81f88b70",
+          "https://images.squarespace-cdn.com/content/v1/60300340d27ffb2c6946ccbe/e3d951c3-7ac4-476c-828a-58bcde56b935/Laufey_Social+Sharing.jpeg",
         likes: "500.3K",
         comments: "1983",
         bookmarks: "20.7K",
@@ -101,7 +101,7 @@ export const TiktokHome: React.FC = () => {
       {
         path: "tiktokvid1.MP4",
         avatar:
-          "https://p16-sign-useast2a.tiktokcdn.com/tos-useast2a-avt-0068-euttp/05e04faaba5ed2b76bc188da19959bba~c5_720x720.jpeg?lk3s=a5d48078&nonce=87782&refresh_token=18175363c2b4f40679dd7823b81ffae8&x-expires=1722837600&x-signature=utLFiR%2F0gdsFL%2Br2DbjXhDyncuA%3D&shp=a5d48078&shcp=81f88b70",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrh0gyciZ31kRMdVu7Mw1nMAWQhGi-Ve-d4mHroDT7py8jn0E8SyLKPV_ddOQ3oLfjl9s&usqp=CAU",
         likes: "2647",
         comments: "11",
         bookmarks: "578",
@@ -205,7 +205,7 @@ export const TiktokHome: React.FC = () => {
                   viewport={{ amount: 0.5 }}
                   className="relative"
                 >
-                  <h3 className="text-white font-semibold text-2xl mb-4 text-center">Great deals that fits your style!</h3>
+                  <h3 className="text-white font-semibold text-2xl mb-4 text-center">We found a great deal for you!</h3>
                   <div className="bg-white rounded-lg mx-auto w-[90%] px-4 py-6 flex flex-col items-center">
                     <div className="bg-neutral-300 rounded-md w-1/2 aspect-square overflow-hidden mb-2 flex items-center justify-center">
                       {!isFetching && recommendationList ? (
