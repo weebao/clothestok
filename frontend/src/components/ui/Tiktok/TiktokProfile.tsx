@@ -170,8 +170,10 @@ export const TiktokProfile: React.FC = () => {
                 <ArrowPathIcon />
               </div>
             </div>
-            <div className="flex-1 text-right hover:cursor-pointer" onClick={() => setOpenCampera(false)}>
-              Cancel
+            <div className="flex-1 text-right">
+              <span className="cursor-pointer" onClick={() => setOpenCampera(false)}>
+                Cancel
+              </span>
             </div>
           </div>
         </div>
