@@ -164,10 +164,10 @@ export const TiktokProfile: React.FC = () => {
                 <div className="rounded-full bg-white active:bg-neutral-500 w-10 h-10 z-10"></div>
               </div>
               <div
-                className="w-8 h-8 p-1 rounded-md flex items-center justify-center hover:bg-neutral-800 active:bg-neutral-800 cursor-pointer"
+                className="w-8 h-8 p-1 rounded-md flex items-center justify-center text-white focus:bg-neutral-800 cursor-pointer"
                 onClick={() => setCameraFacingUser(!cameraFacingUser)}
               >
-                <ArrowPathIcon />
+                <ArrowPathIcon className="w-6 h-6" />
               </div>
             </div>
             <div className="flex-1 text-right">
