@@ -2,6 +2,11 @@ import requests
 import json 
 import secrets
 import string
+from dotenv import load_dotenv
+from fastapi import FastAPI
+from typing import Annotated
+from fastapi import FastAPI, HTTPException, Request, File, UploadFile, Form
+
 
 def generate_random_hash(length=11):
     return ''.join(secrets.choice(string.ascii_lowercase + string.digits) for _ in range(length))
@@ -17,7 +22,6 @@ def upload_file(humanFile, clothesFile):
     
     files = {'files': humanFile} 
     response = requests.post(uploadUrl, files=files)
-    print("Response:", response.json())
     humanPath = response.json()[0]
 
     files = {'files': clothesFile} 
@@ -31,7 +35,6 @@ def clothes_tryon(humanFile, clothesFile):
     humanPath, clothesPath = upload_file(humanFile, clothesFile)
     print(image_upload_url + humanPath, image_upload_url + clothesPath)
 
-    # return ""
     payload = {
         "data": [
             {
@@ -94,3 +97,22 @@ def clothes_tryon(humanFile, clothesFile):
 
     else:
         print('Request failed with status code:', response.status_code)
+
+
+load_dotenv()
+
+app = FastAPI()
+
+origins = [
+    "http://localhost:3000",
+    "*",
+]
+
+@app.post("/tryon")
+async def tryon_endpoint(humanFile: Annotated[bytes, File()], clothesFile: Annotated[bytes, File()]):
+    try:        
+        imageUrl = clothes_tryon(humanFile, clothesFile)
+        return {"tryOnImageUrl": imageUrl}
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
